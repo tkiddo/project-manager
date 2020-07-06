@@ -10,7 +10,6 @@ const metalsmith = require('metalsmith')
 let { render } = require('consolidate').ejs
 render = promisify(render)
 const { downloadDirectory } = require('./constants')
-const { resolve } = require('path')
 
 // https://api.github.com/orgs/sliver-cli/repos获取仓库列表
 const waitFnLoading = (fn, message) => async (...args) => {
