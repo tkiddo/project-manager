@@ -1,25 +1,8 @@
 const { version } = require('./scripts/constants')
 const { program } = require('commander')
 const path = require('path')
+const mapAction = require('./scripts/mapAction')
 module.exports = function () {
-  const mapAction = {
-    create: {
-      alias: 'create',
-      description: 'create a project',
-      examples: ['sliver-cli <project-name>']
-    },
-    'gen-react-component': {
-      alias: 'grc',
-      description: 'generate a react component',
-      examples: ['sliver-cli gen-react-component <component-name>']
-    },
-    '*': {
-      alias: '',
-      description: 'command not found',
-      examples: []
-    }
-  }
-
   Object.keys(mapAction).forEach((action) => {
     program
       .command(action)

@@ -70,7 +70,11 @@ module.exports = async function (projectName) {
         .use((files, metal, done) => {
           const meta = metal.metadata()
           Object.keys(files).forEach(async (file) => {
-            if (file.includes('js') || file.includes('json')) {
+            if (
+              file.includes('js') ||
+              file.includes('json') ||
+              file.includes('html')
+            ) {
               let content = files[file].contents.toString()
               if (content.includes('<%')) {
                 content = await render(content, meta)
@@ -88,8 +92,9 @@ module.exports = async function (projectName) {
           }
         })
     })
-    console.log('project created.')
-    console.log(`cd ${projectName}`)
-    console.log('npm start')
+    console.log('Success!you can start by: ')
+    console.log(`\ncd ${projectName}`)
+    console.log('\nnpm install')
+    console.log('\nnpm start')
   }
 }
