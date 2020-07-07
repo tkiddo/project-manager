@@ -1,4 +1,4 @@
-const { version } = require('./src/constants')
+const { version } = require('./scripts/constants')
 const { program } = require('commander')
 const path = require('path')
 module.exports = function () {
@@ -7,6 +7,11 @@ module.exports = function () {
       alias: 'create',
       description: 'create a project',
       examples: ['sliver-cli <project-name>']
+    },
+    'gen-react-component': {
+      alias: 'grc',
+      description: 'generate a react component',
+      examples: ['sliver-cli gen-react-component <component-name>']
     },
     '*': {
       alias: '',
@@ -23,7 +28,7 @@ module.exports = function () {
         if (action === '*') {
           console.log(mapAction[action].description)
         } else {
-          require(path.resolve(__dirname, `./src/${action}`))(
+          require(path.resolve(__dirname, `./scripts/${action}`))(
             ...process.argv.slice(3)
           )
         }

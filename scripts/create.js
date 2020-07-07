@@ -32,7 +32,7 @@ const fetchRepoList = async () => {
 }
 
 const downloadTemplate = async (repo) => {
-  const dest = `${downloadDirectory}/.template/${repo}`
+  const dest = `${downloadDirectory}/.sliver-template/${repo}`
   await downloadGitRepo(`sliver-cli/${repo}`, dest)
   return dest
 }
@@ -51,14 +51,35 @@ module.exports = async function (projectName) {
     'loading template...'
   )(template)
 
-  if (!fs.existsSync(path.join(result, 'ask.js'))) {
-    ncp(result, path.resolve(projectName))
+  const templateSrc = `${result}/template`
+  if (!fs.existsSync(path.join(result, 'meta.js'))) {
+    ncp(templateSrc, path.resolve(projectName))
   } else {
     await new Promise((resolve, reject) => {
       metalsmith(__dirname)
-        .source(result)
+        .source(templateSrc)
         .destination(path.resolve(projectName))
-        .use((files, metal, done) => {})
+        .use(async (files, metal, done) => {
+          const args = require(path.join(result, 'meta.js'))
+          const res = await inquirer.prompt(args)
+          const meta = metal.metadata()
+          Object.assign(meta, res, { projectName })
+          // delete files['meta.js']
+          done()
+        })
+        .use((files, metal, done) => {
+          const meta = metal.metadata()
+          Object.keys(files).forEach(async (file) => {
+            if (file.includes('js') || file.includes('json')) {
+              let content = files[file].contents.toString()
+              if (content.includes('<%')) {
+                content = await render(content, meta)
+                files[file].contents = Buffer.from(content)
+              }
+            }
+          })
+          done()
+        })
         .build((err) => {
           if (err) {
             reject(err)
@@ -67,5 +88,8 @@ module.exports = async function (projectName) {
           }
         })
     })
+    console.log('project created.')
+    console.log(`cd ${projectName}`)
+    console.log('npm start')
   }
 }
