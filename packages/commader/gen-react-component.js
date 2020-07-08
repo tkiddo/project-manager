@@ -1,6 +1,8 @@
 const path = require('path')
 const fs = require('fs')
 const metalsmith = require('metalsmith')
+const { render } = require('consolidate').ejs
+const { upperCaseTheFirstLetter } = require('../utils')
 
 module.exports = (componentName) => {
   const templateSrc = path.resolve(
@@ -18,8 +20,14 @@ module.exports = (componentName) => {
       Object.keys(files).forEach(async (item) => {
         if (item.includes('js')) {
           let content = files[item].contents.toString()
-          content = content.replace(/componentName/g, componentName)
-          files[item].contents = Buffer.from(content)
+          // content = content.replace(/componentName/g, componentName)
+          // files[item].contents = Buffer.from(content)
+          if (content.includes('<%')) {
+            content = await render(content, {
+              name: upperCaseTheFirstLetter(componentName)
+            })
+            files[item].contents = Buffer.from(content)
+          }
         }
       })
       done()
@@ -29,6 +37,4 @@ module.exports = (componentName) => {
         console.log(err)
       }
     })
-
-  // ncp(templateSrc, path.resolve('components', componentName))
 }

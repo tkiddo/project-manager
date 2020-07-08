@@ -1,7 +1,7 @@
-const { version } = require('./scripts/constants')
+const { version } = require('./packages/lib/constants')
 const { program } = require('commander')
 const path = require('path')
-const mapAction = require('./scripts/mapAction')
+const mapAction = require('./packages/lib/mapAction')
 module.exports = function () {
   Object.keys(mapAction).forEach((action) => {
     program

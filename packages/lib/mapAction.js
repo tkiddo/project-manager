@@ -1,7 +1,7 @@
 module.exports = {
   create: {
     alias: 'create',
-    description: 'create a project',
+    description: 'create a project with template',
     examples: ['sliver-cli <project-name>']
   },
   'gen-react-component': {
@@ -9,11 +9,11 @@ module.exports = {
     description: 'generate a react component',
     examples: ['sliver-cli gen-react-component <component-name>']
   },
-  // build: {
-  //   alias: 'build',
-  //   description: 'build a bundle',
-  //   examples: ['sliver-cli build']
-  // },
+  init: {
+    alias: 'init',
+    description: 'init a normal project',
+    examples: ['sliver-cli init <project-name>']
+  },
   '*': {
     alias: '',
     description: 'command not found',

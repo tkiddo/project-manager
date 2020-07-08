@@ -9,7 +9,7 @@ const fs = require('fs')
 const metalsmith = require('metalsmith')
 let { render } = require('consolidate').ejs
 render = promisify(render)
-const { downloadDirectory } = require('./constants')
+const { downloadDirectory } = require('../lib/constants')
 
 // https://api.github.com/orgs/sliver-cli/repos获取仓库列表
 const waitFnLoading = (fn, message) => async (...args) => {
@@ -25,7 +25,7 @@ const fetchRepoList = async () => {
   const { data } = await axios({
     url,
     headers: {
-      Accept: 'application/vnd.github.v3+json'
+      Accept: 'application/vnd.github.v3+json,application/json'
     }
   })
   return data
@@ -63,7 +63,7 @@ module.exports = async function (projectName) {
           const args = require(path.join(result, 'meta.js'))
           const res = await inquirer.prompt(args)
           const meta = metal.metadata()
-          Object.assign(meta, res, { projectName })
+          Object.assign(meta, res, { name: projectName })
           // delete files['meta.js']
           done()
         })

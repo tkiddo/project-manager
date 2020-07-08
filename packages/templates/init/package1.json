@@ -1,0 +1,29 @@
+{
+  "name": "<%= name %>",
+  "version": "1.0.0",
+  "description": "<%= description %>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justforfunmy/sliver-cli.git"
+  },
+  "keywords": [],
+  "author": "<%= author %>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/justforfunmy/sliver-cli/issues"
+  },
+  "homepage": "https://github.com/justforfunmy/sliver-cli#readme",
+  "devDependencies": {
+		<% if(eslint) {%>"eslint":"^4.0.5",<% } %>
+		<% if(rule && rule==='standard') {%>"eslint-config-standard":"^4.0.5",
+		"eslint-pluguin-standard":"^12.1.1",<% } %>
+		"prettier":"^1.0.0"
+  },
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}
