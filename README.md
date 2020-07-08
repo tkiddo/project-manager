@@ -16,6 +16,10 @@ done:
 
 2. webpack 优化
 
+3. store 模板
+
 new:
 
 1. 整合 git
+
+2. 小程序模板

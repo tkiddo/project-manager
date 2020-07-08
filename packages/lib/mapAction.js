@@ -9,6 +9,11 @@ module.exports = {
     description: 'generate a react component',
     examples: ['sliver-cli gen-react-component <component-name>']
   },
+  'gen-redux-store': {
+    alias: 'grs',
+    description: 'generate a redux store module',
+    examples: ['sliver-cli gen-redux-store <module-name>']
+  },
   init: {
     alias: 'init',
     description: 'init a normal project',
