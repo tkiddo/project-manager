@@ -1,6 +1,6 @@
 const path = require('path')
 const metalsmith = require('metalsmith')
-const { render } = require('consolidate').ejs
+const render = require('../lib/render')
 const inquirer = require('inquirer')
 
 module.exports = (projectName) => {
@@ -17,7 +17,7 @@ module.exports = (projectName) => {
           type: 'list',
           name: 'rule',
           message: 'choose a rule',
-          choices: ['standard', 'eslint']
+          choices: ['standard', 'airbnb']
         })
         res.rule = rule
       } else {
@@ -30,19 +30,7 @@ module.exports = (projectName) => {
       done()
     })
     .use((files, metal, done) => {
-      Object.keys(files).forEach(async (item) => {
-        if (
-          item.includes('js') ||
-          item.includes('json') ||
-          item.includes('json')
-        ) {
-          let content = files[item].contents.toString()
-          if (content.includes('<%')) {
-            content = await render(content, metal.metadata())
-            files[item].contents = Buffer.from(content)
-          }
-        }
-      })
+      render(files, metal.metadata())
       done()
     })
     .build((err) => {

@@ -7,8 +7,7 @@ const ncp = promisify(require('ncp'))
 const path = require('path')
 const fs = require('fs')
 const metalsmith = require('metalsmith')
-let { render } = require('consolidate').ejs
-render = promisify(render)
+const render = require('../lib/render')
 const { downloadDirectory } = require('../lib/constants')
 
 // https://api.github.com/orgs/sliver-cli/repos获取仓库列表
@@ -69,19 +68,7 @@ module.exports = async function (projectName) {
         })
         .use((files, metal, done) => {
           const meta = metal.metadata()
-          Object.keys(files).forEach(async (file) => {
-            if (
-              file.includes('js') ||
-              file.includes('json') ||
-              file.includes('html')
-            ) {
-              let content = files[file].contents.toString()
-              if (content.includes('<%')) {
-                content = await render(content, meta)
-                files[file].contents = Buffer.from(content)
-              }
-            }
-          })
+          render(files, meta)
           done()
         })
         .build((err) => {

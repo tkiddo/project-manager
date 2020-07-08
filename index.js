@@ -11,7 +11,7 @@ module.exports = function () {
         if (action === '*') {
           console.log(mapAction[action].description)
         } else {
-          require(path.resolve(__dirname, `./scripts/${action}`))(
+          require(path.resolve(__dirname, `./packages/commander/${action}`))(
             ...process.argv.slice(3)
           )
         }
