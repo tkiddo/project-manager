@@ -7,7 +7,7 @@ module.exports = async function () {
     name: 'message',
     message: 'message?'
   })
-  const command = `git pull && git add . && git commit -m ${answer.message} && git push origin master`
+  const command = `git pull && git add . && git commit -m "${answer.message}" && git push origin master`
   const message = 'publishing...'
   handleExec(command)(message)
 }
