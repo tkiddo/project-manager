@@ -1,5 +1,6 @@
 const { exec } = require('child_process')
 const inquirer = require('inquirer')
+const { waitFnLoading } = require('../utils/index')
 
 module.exports = async function () {
   const answer = await inquirer.prompt({
@@ -7,8 +8,9 @@ module.exports = async function () {
     name: 'message',
     message: 'message?'
   })
-  console.log(answer)
-  exec(
-    `git pull && git add . && git commit -m ${answer.message} && git push origin master`
-  )
+  const exeFn = () =>
+    exec(
+      `git pull && git add . && git commit -m ${answer.message} && git push origin master`
+    )
+  await waitFnLoading(exeFn, 'publish...')()
 }

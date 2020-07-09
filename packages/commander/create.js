@@ -1,5 +1,4 @@
 const axios = require('axios')
-const ora = require('ora')
 const inquirer = require('inquirer')
 const { promisify } = require('util')
 const downloadGitRepo = promisify(require('download-git-repo'))
@@ -10,14 +9,7 @@ const metalsmith = require('metalsmith')
 const render = require('../lib/render')
 const { downloadDirectory } = require('../lib/constants')
 
-// https://api.github.com/orgs/sliver-cli/repos获取仓库列表
-const waitFnLoading = (fn, message) => async (...args) => {
-  const spinner = ora(message)
-  spinner.start()
-  const result = await fn(...args)
-  spinner.succeed()
-  return result
-}
+const { waitFnLoading } = require('../utils/index')
 
 const fetchRepoList = async () => {
   const url = 'https://api.github.com/orgs/sliver-cli/repos'
