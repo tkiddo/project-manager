@@ -1,6 +1,6 @@
 const { exec } = require('child_process')
 const inquirer = require('inquirer')
-const { waitFnLoading } = require('../utils/index')
+const ora = require('ora')
 
 module.exports = async function () {
   const answer = await inquirer.prompt({
@@ -8,9 +8,13 @@ module.exports = async function () {
     name: 'message',
     message: 'message?'
   })
-  const exeFn = () =>
-    exec(
-      `git pull && git add . && git commit -m ${answer.message} && git push origin master`
-    )
-  await waitFnLoading(exeFn, 'publish...')()
+  const spinner = ora('publishing...')
+  spinner.start()
+  exec(
+    `git pull && git add . && git commit -m ${answer.message} && git push origin master`,
+    () => {
+      spinner.succeed()
+      console.log('done.')
+    }
+  )
 }

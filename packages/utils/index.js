@@ -17,7 +17,6 @@ const waitFnLoading = (fn, message) => async (...args) => {
   spinner.start()
   const result = await fn(...args)
   spinner.succeed()
-  console.log('done.')
   return result
 }
 module.exports = {
