@@ -19,6 +19,7 @@ const waitFnLoading = (fn, message) => async (...args) => {
   spinner.succeed()
   return result
 }
+
 module.exports = {
   upperCaseTheFirstLetter,
   handleAwait,
