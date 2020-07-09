@@ -1,6 +1,6 @@
 module.exports = {
   create: {
-    alias: 'create',
+    alias: 'c',
     description: 'create a project with template',
     examples: ['sliver-cli <project-name>']
   },
@@ -14,8 +14,13 @@ module.exports = {
     description: 'generate a redux store module',
     examples: ['sliver-cli gen-redux-store <module-name>']
   },
+  'git-push': {
+    alias: 'gpush',
+    description: 'commit and push',
+    examples: ['sliver-cli git-push']
+  },
   init: {
-    alias: 'init',
+    alias: 'i',
     description: 'init a normal project',
     examples: ['sliver-cli init <project-name>']
   },

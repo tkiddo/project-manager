@@ -3,9 +3,12 @@ const { program } = require('commander')
 const path = require('path')
 const mapAction = require('./packages/lib/mapAction')
 module.exports = function () {
+  program.option('-m,--msg', 'commit message')
+
   Object.keys(mapAction).forEach((action) => {
     program
       .command(action)
+      .alias(mapAction[action].alias)
       .description(mapAction[action].description)
       .action((source, destination) => {
         if (action === '*') {
@@ -27,5 +30,6 @@ module.exports = function () {
     })
   })
 
+  program.option('-m,--message', 'commit message')
   program.version(version, '-v, --version').parse(process.argv)
 }
