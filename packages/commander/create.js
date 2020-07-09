@@ -10,7 +10,7 @@ const render = require('../lib/render')
 const { downloadDirectory } = require('../lib/constants')
 const chalk = require('chalk')
 
-const { waitFnLoading } = require('../utils/index')
+const { waitFnPending } = require('../utils/index')
 
 const fetchRepoList = async () => {
   const url = 'https://api.github.com/orgs/sliver-cli/repos'
@@ -30,7 +30,7 @@ const downloadTemplate = async (repo) => {
 }
 
 module.exports = async function (projectName) {
-  let repos = await waitFnLoading(
+  let repos = await waitFnPending(
     fetchRepoList,
     chalk.blueBright('fetching templates...')
   )()
@@ -41,7 +41,7 @@ module.exports = async function (projectName) {
     message: 'please choose a template',
     choices: repos
   })
-  const result = await waitFnLoading(
+  const result = await waitFnPending(
     downloadTemplate,
     chalk.blueBright('loading template...')
   )(template)
