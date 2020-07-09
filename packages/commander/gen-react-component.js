@@ -1,7 +1,5 @@
 const path = require('path')
-const fs = require('fs')
-const metalsmith = require('metalsmith')
-const render = require('../lib/render')
+const generateTemplate = require('../lib/generateTemplate')
 const { upperCaseTheFirstLetter } = require('../utils')
 
 module.exports = (componentName) => {
@@ -9,20 +7,6 @@ module.exports = (componentName) => {
     __dirname,
     '../templates/react/component-template'
   )
-  if (!fs.existsSync(path.resolve('components'))) {
-    fs.mkdirSync(path.resolve('components'))
-  }
-
-  metalsmith(__dirname)
-    .source(templateSrc)
-    .destination(path.resolve('components', componentName))
-    .use((files, metal, done) => {
-      render(files, { name: upperCaseTheFirstLetter(componentName) })
-      done()
-    })
-    .build((err) => {
-      if (err) {
-        console.log(err)
-      }
-    })
+  const destDir = 'components'
+  generateTemplate(upperCaseTheFirstLetter(componentName))(templateSrc, destDir)
 }

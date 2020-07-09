@@ -2,6 +2,7 @@ const path = require('path')
 const metalsmith = require('metalsmith')
 const render = require('../lib/render')
 const inquirer = require('inquirer')
+const chalk = require('chalk')
 
 module.exports = (projectName) => {
   const templateSrc = path.resolve(__dirname, '../templates/init')
@@ -35,7 +36,7 @@ module.exports = (projectName) => {
     })
     .build((err) => {
       if (err) {
-        console.log(err)
+        console.log(chalk.red(err))
       }
     })
 }

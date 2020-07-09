@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "chalk": "^4.1.0",
     "commander": "^5.1.0",
     "consolidate": "^0.15.1",
     "download-git-repo": "^3.0.2",

@@ -19,6 +19,11 @@ module.exports = {
     description: 'commit and push',
     examples: ['sliver-cli git-push']
   },
+  lint: {
+    alias: 'l',
+    description: 'start lint code',
+    examples: ['sliver-cli lint']
+  },
   init: {
     alias: 'i',
     description: 'init a normal project',

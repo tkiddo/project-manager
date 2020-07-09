@@ -8,6 +8,7 @@ const fs = require('fs')
 const metalsmith = require('metalsmith')
 const render = require('../lib/render')
 const { downloadDirectory } = require('../lib/constants')
+const chalk = require('chalk')
 
 const { waitFnLoading } = require('../utils/index')
 
@@ -29,7 +30,10 @@ const downloadTemplate = async (repo) => {
 }
 
 module.exports = async function (projectName) {
-  let repos = await waitFnLoading(fetchRepoList, 'fetching templates...')()
+  let repos = await waitFnLoading(
+    fetchRepoList,
+    chalk.blueBright('fetching templates...')
+  )()
   repos = repos.map((item) => item.name)
   const { template } = await inquirer.prompt({
     name: 'template',
@@ -39,7 +43,7 @@ module.exports = async function (projectName) {
   })
   const result = await waitFnLoading(
     downloadTemplate,
-    'loading template...'
+    chalk.blueBright('loading template...')
   )(template)
 
   const templateSrc = `${result}/template`
@@ -71,7 +75,7 @@ module.exports = async function (projectName) {
           }
         })
     })
-    console.log('Success!you can start by: ')
+    console.log(chalk.green('Success ! you can start by: '))
     console.log(`\ncd ${projectName}`)
     console.log('\nnpm install')
     console.log('\nnpm start')
