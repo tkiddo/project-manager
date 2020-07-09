@@ -8,7 +8,6 @@ module.exports = (shell, callback) => (message) => {
     if (error) {
       console.error(`exec error: ${chalk.red(error)}`)
       process.exit(0)
-      return
     }
     spinner.succeed()
     console.log(chalk.green('done.'))
