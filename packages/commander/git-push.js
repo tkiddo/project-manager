@@ -12,7 +12,10 @@ module.exports = async function () {
   spinner.start()
   exec(
     `git pull && git add . && git commit -m ${answer.message} && git push origin master`,
-    () => {
+    (error, stdout, stderr) => {
+      if (error) {
+        return console.error(`exec error: ${error}`)
+      }
       spinner.succeed()
       console.log('done.')
     }
