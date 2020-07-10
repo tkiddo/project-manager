@@ -27,4 +27,4 @@ module.exports = {
   waitFnPending
 }
 
-console.log(c)
+console.log(b)
