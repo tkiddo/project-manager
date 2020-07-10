@@ -26,3 +26,5 @@ module.exports = {
   handleAwait,
   waitFnPending
 }
+
+console.log(c)
