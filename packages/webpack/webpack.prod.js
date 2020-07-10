@@ -2,7 +2,8 @@ const { merge } = require('webpack-merge')
 const baseConfig = require('./webpack.common.js')
 const webpack = require('webpack')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
-const homepage = require('./package.json').homepage
+const path = require('path')
+const homepage = require(path.resolve(process.cwd(), 'package.json')).homepage
 
 module.exports = merge(baseConfig, {
   // 设置为生产模式

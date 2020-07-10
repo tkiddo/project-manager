@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
 const root = process.cwd()
 
@@ -69,6 +70,7 @@ module.exports = {
       chunkFilename: 'static/css/[name].[contenthash:8].chunk.css'
     }),
     // 每次构建前清理dist文件夹
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new ProgressBarPlugin()
   ]
 }
