@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "./node_modules/.bin/eslint src/**/*.{js,jsx} --fix",
     "format": "./node_modules/.bin/prettier --write src/**/*.{js,jsx}",
-    "build": "webpack --progress --config webpack.prod.js",
+    "build": "sliver-cli build",
     "start": "webpack-dev-server --progress --open --config webpack.dev.js",
     "analysis": "webpack --profile --json > stats.json --config webpack.prod.js"
   },
@@ -41,6 +41,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-standard": "^4.0.1",
     "file-loader": "^6.0.0",
     "node-sass": "^4.14.1",

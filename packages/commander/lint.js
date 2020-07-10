@@ -18,7 +18,8 @@ module.exports = (...destDir) => {
       chalk.redBright('please add a configFile first ,like .eslintrc.json')
     )
   }
-  const cli = new CLIEngine(config)
+  const cli = new CLIEngine({ baseConfig: config })
+
   const fn = (destDir) => {
     const { results } = cli.executeOnFiles(destDir)
     results.forEach((item) => {
