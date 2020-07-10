@@ -1,7 +1,20 @@
 const webpack = require('webpack')
-const config = require('../webpack/webpack.prod')
+let config = require('../webpack/webpack.prod')
+const chalk = require('chalk')
+const fs = require('fs')
+const path = require('path')
+const { merge } = require('webpack-merge')
 
 module.exports = () => {
+  const configFile = fs.existsSync(
+    path.resolve(process.cwd(), 'webpack.config.js')
+  )
+    ? path.resolve(process.cwd(), 'webpack.config.js')
+    : null
+  console.log(chalk.blueBright('Creating an optimized production build...'))
+  if (configFile) {
+    config = merge(config, require(configFile))
+  }
   webpack(config, (err, stats) => {
     if (err) {
       console.error(err.stack || err)
