@@ -11,7 +11,7 @@ module.exports = [
   },
   {
     type: 'confirm',
-    name: 'eslint',
-    message: 'using eslint?'
+    name: 'redux',
+    message: 'using redux?'
   }
 ]

@@ -3,27 +3,26 @@ const metalsmith = require('metalsmith')
 const render = require('../lib/render')
 const inquirer = require('inquirer')
 const chalk = require('chalk')
+const fs = require('fs')
 
-module.exports = (projectName) => {
-  const templateSrc = path.resolve(__dirname, '../templates/init')
+module.exports = async (projectName = 'demo') => {
+  const templateList = fs.readdirSync(
+    path.resolve(__dirname, '../templates/init')
+  )
+  const { template } = await inquirer.prompt({
+    type: 'list',
+    name: 'template',
+    message: 'please choose a template',
+    choices: templateList
+  })
+  const templateSrc = path.resolve(__dirname, '../templates/init', template)
 
   metalsmith(__dirname)
-    .source(templateSrc)
+    .source(path.resolve(templateSrc, 'template'))
     .destination(path.resolve(projectName))
     .use(async (files, metal, done) => {
       const args = require(path.join(templateSrc, 'meta.js'))
       const res = await inquirer.prompt(args)
-      if (res.eslint) {
-        const { rule } = await inquirer.prompt({
-          type: 'list',
-          name: 'rule',
-          message: 'choose a rule',
-          choices: ['standard', 'airbnb']
-        })
-        res.rule = rule
-      } else {
-        res.rule = null
-      }
       const meta = metal.metadata()
       Object.assign(meta, res, { name: projectName })
       console.log(meta)
