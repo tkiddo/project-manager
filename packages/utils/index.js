@@ -17,7 +17,7 @@ const waitFnPending = (fn, message) => async (...args) => {
   const spinner = ora(message)
   spinner.start()
   const result = await fn(...args)
-  spinner.succeed(chalk.greenBright('done.'))
+  spinner.succeed(chalk.greenBrightBright('done.'))
   return result
 }
 

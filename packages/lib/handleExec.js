@@ -10,7 +10,7 @@ module.exports = (shell, callback) => (message) => {
       process.exit(0)
     }
     spinner.succeed()
-    console.log(chalk.green('done.'))
+    console.log(chalk.greenBright('done.'))
     typeof callback === 'function' && callback()
   })
 }

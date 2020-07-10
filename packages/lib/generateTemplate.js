@@ -21,7 +21,7 @@ module.exports = (name) => (templateSrc, destDir) => {
         return console.log(chalk.red(err))
       }
       Object.keys(files).forEach((item) => {
-        console.log(chalk.green(`created ${path.join(dest, item)}`))
+        console.log(chalk.greenBright(`created ${path.join(dest, item)}`))
       })
     })
 }

@@ -75,7 +75,7 @@ module.exports = async function (projectName) {
           }
         })
     })
-    console.log(chalk.green('Success ! you can start by: '))
+    console.log(chalk.greenBright('Success ! you can start by: '))
     console.log(`\ncd ${projectName}`)
     console.log('\nnpm install')
     console.log('\nnpm start')
