@@ -1,19 +1,17 @@
-import { ADD, MINUS } from './constant'
+import { ADD, MINUS } from './constant';
 
 export const add = (payload) => ({
   type: ADD,
-  payload
-})
+  payload,
+});
 
 export const minus = (payload) => ({
   type: MINUS,
-  payload
-})
+  payload,
+});
 
-export const asyncAdd = (payload) => {
-  return (dispatch) => {
-    setTimeout(() => {
-      dispatch(add())
-    }, 3000)
-  }
-}
+export const asyncAdd = () => (dispatch) => {
+  setTimeout(() => {
+    dispatch(add());
+  }, 3000);
+};

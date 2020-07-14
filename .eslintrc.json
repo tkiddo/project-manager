@@ -4,15 +4,21 @@
     "commonjs": true,
     "es2020": true
   },
-  "extends": ["standard", "eslint:recommended", "plugin:prettier/recommended"],
+  "extends": ["airbnb-base", "eslint:recommended"],
   "parserOptions": {
     "ecmaVersion": 11
   },
   "rules": {
-    "prettier/prettier": "error",
-    "no-console": "warn",
-    "no-var": "error",
-    "prefer-const": "warn",
-    "eqeqeq": "warn"
+    "linebreak-style": ["error", "windows"],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "never",
+        "objects": "never",
+        "imports": "never",
+        "exports": "never",
+        "functions": "never"
+      }
+    ]
   }
 }

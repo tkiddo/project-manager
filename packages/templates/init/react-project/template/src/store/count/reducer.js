@@ -1,22 +1,22 @@
-import { ADD, MINUS } from './constant'
+import { ADD, MINUS } from './constant';
 
 const initialState = {
-  number: 0
-}
+  number: 0,
+};
 
-export const count = (state = initialState, action) => {
+export default function count(state = initialState, action) {
   switch (action.type) {
     case ADD:
       return {
         ...state,
-        number: state.number + 1
-      }
+        number: state.number + 1,
+      };
     case MINUS:
       return {
         ...state,
-        number: state.number - 1
-      }
+        number: state.number - 1,
+      };
     default:
-      return state
+      return state;
   }
 }

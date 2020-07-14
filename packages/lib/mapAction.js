@@ -19,11 +19,6 @@ module.exports = {
     description: 'commit and push',
     examples: ['sliver-cli git-push']
   },
-  build: {
-    alias: 'bld',
-    description: 'bundle the project',
-    examples: ['sliver-cli build']
-  },
   lint: {
     alias: 'l',
     description: 'start lint code',
@@ -39,4 +34,4 @@ module.exports = {
     description: 'command not found',
     examples: []
   }
-}
+};
