@@ -19,24 +19,24 @@ const CssCommonLoader = [
     options: {
       // 配置路径寻找从当前目录的上一级开始
       publicPath: '../',
-      hmr: process.env.NODE_ENV === 'development',
-    },
+      hmr: process.env.NODE_ENV === 'development'
+    }
   },
   'css-loader',
   {
     loader: 'postcss-loader',
     options: {
       ident: 'postcss',
-      plugins: () => [PostcssPresetEnv()],
-    },
-  },
+      plugins: () => [PostcssPresetEnv()]
+    }
+  }
 ];
 
 const getPublicPath = () => {
   if (pkg.homepage) {
     return pkg.homepage;
   }
-  return '';
+  return '/';
 };
 
 module.exports = {
@@ -46,7 +46,7 @@ module.exports = {
     // contenthash:根据文件内容是否变化，来改变hash值
     filename: 'js/[name].[contenthash:10].js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: getPublicPath(),
+    publicPath: getPublicPath()
   },
   mode: 'production',
   // 配置开发服务器
@@ -54,7 +54,7 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'dist'),
     // gzip压缩
     compress: true,
-    port: 3000,
+    port: 3000
   },
   // source-map / cheap-module-source-map
   devtool: 'cheap-module-source-map',
@@ -66,17 +66,17 @@ module.exports = {
           chunks: 'initial',
           minChunks: 2,
           maxInitialRequests: 5, // The default limit is too small to showcase the effect
-          minSize: 0, // This is example is too small to create commons chunks
+          minSize: 0 // This is example is too small to create commons chunks
         },
         vendor: {
           test: /node_modules/,
           chunks: 'initial',
           name: 'vendor',
           priority: 10,
-          enforce: true,
-        },
-      },
-    },
+          enforce: true
+        }
+      }
+    }
   },
   // externals: { react: 'React', 'react-dom': 'ReactDOM' },
   module: {
@@ -87,10 +87,10 @@ module.exports = {
         test: /\.js$/,
         loader: 'eslint-loader',
         options: {
-          fix: true,
+          fix: true
         },
         include: path.resolve(__dirname, 'src'),
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         // 所有文件只会有一个loader处理一个，注意：不能有两个配置处理同一个文件
@@ -107,34 +107,34 @@ module.exports = {
                       useBuiltIns: 'usage',
                       corejs: {
                         version: '3.6',
-                        proposals: true,
-                      },
+                        proposals: true
+                      }
                     },
-                    '@babel/preset-react',
-                  ],
+                    '@babel/preset-react'
+                  ]
                 ],
                 // 第二次构建时会读取缓存
                 cacheDirectory: true,
                 // 动态导入语法
-                plugins: ['@babel/plugin-syntax-dynamic-import'],
-              },
+                plugins: ['@babel/plugin-syntax-dynamic-import']
+              }
             },
             include: path.resolve(__dirname, 'src'),
-            exclude: /node_modules/,
+            exclude: /node_modules/
           },
           {
             test: /\.css$/,
-            use: [...CssCommonLoader],
+            use: [...CssCommonLoader]
           },
           {
             test: /\.less$/,
             use: [...CssCommonLoader, 'less-loader'],
-            exclude: /node_modules/,
+            exclude: /node_modules/
           },
           {
             test: /\.s[ac]ss$/,
             use: [...CssCommonLoader, 'sass-loader'],
-            exclude: /node_modules/,
+            exclude: /node_modules/
           },
           {
             test: /\.(png|jpg|gif|svg)$/,
@@ -152,16 +152,16 @@ module.exports = {
                     return '[contenthash].[ext]';
                   },
                   outputPath: 'media',
-                  limit: 8 * 1024,
-                },
-              },
+                  limit: 8 * 1024
+                }
+              }
             ],
-            exclude: /node_modules/,
+            exclude: /node_modules/
           },
           {
             test: /\.html$/,
             loader: 'html-loader',
-            exclude: /node_modules/,
+            exclude: /node_modules/
           },
           {
             exclude: /\.(css|less|scss|js|html|jpg|png|gif)$/,
@@ -170,23 +170,23 @@ module.exports = {
                 loader: 'file-loader',
                 options: {
                   name: '[name].[ext]',
-                  outputPath: 'static',
-                },
-              },
-            ],
-          },
-        ],
-      },
-    ],
+                  outputPath: 'static'
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   plugins: [
     new CleanWebpackPlugin(),
     // 告诉webpack哪些库不参与打包
     new webpack.DllReferencePlugin({
-      manifest: path.resolve(__dirname, 'dll/manifest.json'),
+      manifest: path.resolve(__dirname, 'dll/manifest.json')
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash:10].css',
+      filename: 'css/[name].[contenthash:10].css'
     }),
     new OptimizeCssAssetsPlugin(),
     new CopyPlugin({
@@ -195,13 +195,14 @@ module.exports = {
           from: path.resolve(__dirname, 'public'),
           to: path.resolve(__dirname, 'dist'),
           globOptions: {
-            ignore: ['index.html'],
-          },
-        },
-      ],
+            ignore: ['index.html']
+          }
+        }
+      ]
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      favicon: './public/favicon.ico',
       // html压缩
       minify: {
         collapseWhitespace: true,
@@ -209,14 +210,14 @@ module.exports = {
         removeRedundantAttributes: true,
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true,
-      },
+        useShortDoctype: true
+      }
     }),
     new AddAssetHtmlPlugin({
-      filepath: path.resolve(__dirname, 'dll/react.js'),
+      filepath: path.resolve(__dirname, 'dll/react.js')
     }),
     new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-    }),
-  ],
+      analyzerMode: 'static'
+    })
+  ]
 };

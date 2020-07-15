@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const webpack = require('webpack');
 
@@ -10,7 +9,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'js/bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist')
   },
   mode: 'development',
   // 配置开发服务器
@@ -21,7 +20,7 @@ module.exports = {
     port: 3000,
     open: true,
     // 启用hmr
-    hot: true,
+    hot: true
   },
   // 配置source map,提示错误代码的准确信息
   // eval-source-map / eval-cheap-module-source-map
@@ -41,30 +40,30 @@ module.exports = {
                   useBuiltIns: 'usage',
                   corejs: {
                     version: '3.6',
-                    proposals: true,
-                  },
+                    proposals: true
+                  }
                 },
-                '@babel/preset-react',
-              ],
+                '@babel/preset-react'
+              ]
             ],
             // 第二次构建时会读取缓存
             cacheDirectory: true,
             // 动态导入语法
-            plugins: ['@babel/plugin-syntax-dynamic-import'],
-          },
-        },
+            plugins: ['@babel/plugin-syntax-dynamic-import']
+          }
+        }
       },
       {
         test: /\.css$/,
-        use: [...CssCommonLoader],
+        use: [...CssCommonLoader]
       },
       {
         test: /\.less$/,
-        use: [...CssCommonLoader, 'less-loader'],
+        use: [...CssCommonLoader, 'less-loader']
       },
       {
         test: /\.s[ac]ss$/,
-        use: [...CssCommonLoader, 'sass-loader'],
+        use: [...CssCommonLoader, 'sass-loader']
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -83,14 +82,14 @@ module.exports = {
                 return '[contenthash].[ext]';
               },
               outputPath: 'media',
-              limit: 8 * 1024,
-            },
-          },
-        ],
+              limit: 8 * 1024
+            }
+          }
+        ]
       },
       {
         test: /\.html$/,
-        loader: 'html-loader',
+        loader: 'html-loader'
       },
       {
         exclude: /\.(css|less|scss|js|html|jpg|png|gif)$/,
@@ -99,30 +98,23 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: 'static',
-            },
-          },
-        ],
-      },
-    ],
+              outputPath: 'static'
+            }
+          }
+        ]
+      }
+    ]
   },
   plugins: [
     new webpack.DllReferencePlugin({
-      manifest: path.resolve(__dirname, 'dll/manifest.json'),
+      manifest: path.resolve(__dirname, 'dll/manifest.json')
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
-    }),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'public'),
-          to: path.resolve(__dirname, 'dist'),
-        },
-      ],
+      favicon: './public/favicon.ico'
     }),
     new AddAssetHtmlPlugin({
-      filepath: path.resolve(__dirname, 'dll/react.js'),
-    }),
-  ],
+      filepath: path.resolve(__dirname, 'dll/react.js')
+    })
+  ]
 };
