@@ -27,7 +27,8 @@
       "operator-linebreak": [
         "error",
         "after"
-      ]
+      ],
+      "comma-dangle": 0
     },
     "env": {
       "browser": true

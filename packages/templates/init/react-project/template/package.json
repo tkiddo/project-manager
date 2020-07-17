@@ -39,7 +39,8 @@
         "error",
         "after"
       ],
-      "react/no-array-index-key": 1
+      "react/no-array-index-key": 1,
+      "comma-dangle": 0
     },
     "env": {
       "browser": true
