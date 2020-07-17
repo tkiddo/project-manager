@@ -214,7 +214,9 @@ module.exports = {
       }
     }),
     new AddAssetHtmlPlugin({
-      filepath: path.resolve(__dirname, 'dll/react.js')
+      filepath: path.resolve(__dirname, 'dll/react.js'),
+      outputPath: 'js',
+      publicPath: './js'
     }),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static'
