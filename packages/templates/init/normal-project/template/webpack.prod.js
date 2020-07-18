@@ -5,9 +5,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const PostcssPresetEnv = require('postcss-preset-env');
 const CopyPlugin = require('copy-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-const webpack = require('webpack');
 const pkg = require('./package.json');
 
 // 决定browerslist用哪个模式
@@ -109,8 +106,7 @@ module.exports = {
                         version: '3.6',
                         proposals: true
                       }
-                    },
-                    '@babel/preset-react'
+                    }
                   ]
                 ],
                 // 第二次构建时会读取缓存
@@ -181,10 +177,6 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    // 告诉webpack哪些库不参与打包
-    new webpack.DllReferencePlugin({
-      manifest: path.resolve(__dirname, 'dll/manifest.json')
-    }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash:10].css'
     }),
@@ -212,14 +204,6 @@ module.exports = {
         removeStyleLinkTypeAttributes: true,
         useShortDoctype: true
       }
-    }),
-    new AddAssetHtmlPlugin({
-      filepath: path.resolve(__dirname, 'dll/react.js'),
-      outputPath: 'js',
-      publicPath: './js'
-    }),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static'
     })
   ]
 };
