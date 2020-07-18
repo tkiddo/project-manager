@@ -1,8 +1,8 @@
-import { ADD } from "./constant"
+import { ADD } from "./constant";
 
 const initialState = {
 	number:0
-}
+};
 
 export const <%= name %> = (state=initialState,action)=>{
 	switch (action.type) {
@@ -14,4 +14,4 @@ export const <%= name %> = (state=initialState,action)=>{
 		default:
 			return state
 	}
-}
+};
