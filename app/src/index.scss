@@ -1,4 +1,9 @@
 @import '~bootstrap/scss/bootstrap';
+@import './assets/style/color.scss';
+
+body {
+  color: $opposite;
+}
 
 a,
 a:hover {

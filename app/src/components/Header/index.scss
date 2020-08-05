@@ -1,0 +1,21 @@
+@import '../../assets/style/color.scss';
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+  padding: 0 20px;
+  .header-local {
+    flex: 1 auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .local-dir {
+      color: $dark-main;
+      cursor: pointer;
+    }
+  }
+}
