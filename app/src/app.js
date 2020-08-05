@@ -2,10 +2,10 @@
 import React from 'react';
 import './app.scss';
 import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import SideMenu from './components/SideMenu';
 import AppRoute from './route/index';
 import logo from './assets/logo.png';
-import { Link } from 'react-router-dom';
 
 function App(props) {
   return (
@@ -15,7 +15,7 @@ function App(props) {
           <Link to="/">
             <img src={logo} className="app-logo" />
           </Link>
-          <SideMenu></SideMenu>
+          <SideMenu />
         </Col>
         <Col md={10} className="app-right">
           <AppRoute />
