@@ -1,0 +1,13 @@
+@import '../../../assets/style/color.scss';
+
+.menu-item {
+  color: $opposite;
+  text-align: center;
+  padding: 8px 30px;
+  cursor: pointer;
+  border-radius: 5px;
+  &:hover {
+    background-color: $opposite;
+    color: $main;
+  }
+}
