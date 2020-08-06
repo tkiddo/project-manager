@@ -7,8 +7,10 @@ import FormModal from '../../components/FormModal';
 
 const TplManage = () => {
   const [list, setList] = useState([]);
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [tpl, setTpl] = useState(null);
+
   const getList = (forced) => {
     setLoading(true);
     ipcRenderer.send('request-template-list', forced);
@@ -17,9 +19,17 @@ const TplManage = () => {
       setList(arg);
     });
   };
+  const handleSelect = (item) => {
+    setTpl(item);
+    setModalShow(true);
+  };
   useEffect(() => {
     getList(false);
   }, []);
+
+  const handleSubmit = (e) => {
+    console.log(e);
+  };
   return (
     <>
       <Button size="sm" className="tpl-fresh" onClick={() => getList(true)}>
@@ -48,7 +58,7 @@ const TplManage = () => {
                 </th>
                 <th className="tpl-item-meta">{meta}</th>
                 <th>
-                  <Button variant="success" size="sm" onClick={() => setModalShow(true)}>
+                  <Button variant="success" size="sm" onClick={() => handleSelect(name)}>
                     创建模版项目
                   </Button>
                 </th>
@@ -57,7 +67,17 @@ const TplManage = () => {
           })}
         </tbody>
       </Table>
-      <FormModal show={modalShow} onHide={() => setModalShow(false)} />
+      <FormModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        fields={[
+          { field: 'template', label: '模板名称', value: tpl, readonly: true },
+          { filed: 'name', label: '项目名称', value: '', readonly: false },
+          { field: 'description', label: '项目描述', value: '', readonly: false }
+        ]}
+        title="创建项目"
+        onSubmit={handleSubmit}
+      />
     </>
   );
 };
