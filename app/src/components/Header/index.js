@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './index.scss';
-import { withRouter } from 'react-router-dom';
 import { ipcRenderer } from 'electron';
 import { menu } from '../../config';
+import usePathname from '../../hooks/pathname';
 
 const getTitle = (pathname) => {
   if (pathname === '/') {
@@ -13,9 +13,7 @@ const getTitle = (pathname) => {
 };
 
 const Header = (props) => {
-  const {
-    location: { pathname }
-  } = props;
+  const pathname = usePathname();
 
   const [local, setLocal] = useState('');
 
@@ -46,4 +44,4 @@ const Header = (props) => {
   );
 };
 
-export default withRouter(Header);
+export default Header;

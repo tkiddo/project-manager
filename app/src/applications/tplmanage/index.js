@@ -3,9 +3,11 @@ import './index.scss';
 
 import { ipcRenderer } from 'electron';
 import { Table, Button, Spinner, Badge } from 'react-bootstrap';
+import FormModal from '../../components/FormModal';
 
 const TplManage = () => {
-  const [list, setList] = useState([{ name: '1' }]);
+  const [list, setList] = useState([]);
+  const [modalShow, setModalShow] = React.useState(false);
   const [loading, setLoading] = useState(true);
   const getList = (forced) => {
     setLoading(true);
@@ -46,7 +48,7 @@ const TplManage = () => {
                 </th>
                 <th className="tpl-item-meta">{meta}</th>
                 <th>
-                  <Button variant="success" size="sm">
+                  <Button variant="success" size="sm" onClick={() => setModalShow(true)}>
                     创建模版项目
                   </Button>
                 </th>
@@ -55,6 +57,7 @@ const TplManage = () => {
           })}
         </tbody>
       </Table>
+      <FormModal show={modalShow} onHide={() => setModalShow(false)} />
     </>
   );
 };

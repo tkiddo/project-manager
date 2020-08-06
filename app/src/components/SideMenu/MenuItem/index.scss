@@ -6,8 +6,13 @@
   padding: 8px 30px;
   cursor: pointer;
   border-radius: 5px;
+  margin-bottom: 5px;
+  transition: background-color ease 0.3s;
   &:hover {
-    background-color: $opposite;
+    color: $light-main;
+  }
+  &.active-menu {
+    background-color: $light-main;
     color: $main;
   }
 }
