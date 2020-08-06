@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './index.scss';
 import { withRouter } from 'react-router-dom';
+import { ipcRenderer } from 'electron';
 import { menu } from '../../config';
-
-const { ipcRenderer } = window.require('electron');
 
 const getTitle = (pathname) => {
   if (pathname === '/') {
@@ -28,7 +27,6 @@ const Header = (props) => {
   const handleChange = () => {
     ipcRenderer.send('change-dir', 'openDirectory');
     ipcRenderer.once('selected-dir', (event, arg) => {
-      console.log(arg);
       setLocal(arg);
     });
   };

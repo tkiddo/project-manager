@@ -1,0 +1,13 @@
+@import '../../assets/style/color.scss';
+.tpl-table-head {
+  color: $opposite;
+  th {
+    padding: 10px 0;
+  }
+}
+.tpl-table-body {
+  th {
+    font-weight: normal;
+    padding: 10px 0;
+  }
+}
