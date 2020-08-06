@@ -9,7 +9,7 @@ const getTitle = (pathname) => {
     return '首页';
   }
   const res = menu.find((item) => item.path.indexOf(pathname) !== -1);
-  return res.name;
+  return res.name ? res.name : 'not found';
 };
 
 const Header = (props) => {

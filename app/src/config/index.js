@@ -4,8 +4,8 @@ const menu = [
     path: '/tplmanage'
   },
   {
-    name: '组件管理',
-    path: '/compmanage'
+    name: '代码片段',
+    path: '/home'
   }
 ];
 
