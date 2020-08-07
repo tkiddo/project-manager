@@ -1,8 +1,8 @@
-const { ipcMain, dialog } = require('electron');
+const { ipcMain } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const metalsmith = require('metalsmith');
-const { fetchGit, downloadRepo, renderTemplate } = require('./utils');
+const { fetchGit, downloadRepo, renderTemplate, handleError, handleExec } = require('./utils');
 const { downloadDirectory } = require('./constants');
 
 module.exports = function local() {
@@ -18,7 +18,7 @@ module.exports = function local() {
     try {
       data = await fetchGit(url);
     } catch (error) {
-      dialog.showErrorBox('boom!', JSON.stringify(error));
+      handleError(error);
     }
     // eslint-disable-next-line camelcase
     const { name, full_name } = data;
@@ -36,9 +36,10 @@ module.exports = function local() {
       `.sliver-cli/cli-template/${template}/template`
     );
     await new Promise((resolve, reject) => {
+      let destination = path.resolve(directory, name);
       metalsmith(__dirname)
         .source(templateSrc)
-        .destination(path.resolve(directory, name))
+        .destination(destination)
         .use((files, metal, done) => {
           const meta = { name, description };
           renderTemplate(files, meta);
@@ -48,7 +49,9 @@ module.exports = function local() {
           if (err) {
             reject(err);
           } else {
-            resolve();
+            destination = destination.replace(/\\/g, '/');
+            const gitInitShell = `cd /d ${destination} && git init`;
+            handleExec(gitInitShell);
             event.reply('project-created');
           }
         });

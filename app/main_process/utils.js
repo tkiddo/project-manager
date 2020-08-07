@@ -1,11 +1,17 @@
 const axios = require('axios');
 const { promisify } = require('util');
 const downloadGitRepo = promisify(require('download-git-repo'));
+const { exec } = require('child_process');
+const { dialog } = require('electron');
 let { render } = require('consolidate').ejs;
 
 render = promisify(render);
 
 const { downloadDirectory } = require('./constants');
+
+const handleError = (error) => {
+  dialog.showErrorBox('boom!', JSON.stringify(error));
+};
 
 const fetchGit = async (url) => {
   const { data } = await axios({
@@ -40,4 +46,15 @@ const renderTemplate = (files, data) => {
   });
 };
 
-module.exports = { fetchGit, downloadRepo, renderTemplate };
+const handleExec = (shell, callback) => {
+  exec(`${shell}`, (error) => {
+    if (error) {
+      handleError(error);
+      process.exit(0);
+    }
+    // eslint-disable-next-line no-unused-expressions
+    typeof callback === 'function' && callback();
+  });
+};
+
+module.exports = { fetchGit, downloadRepo, renderTemplate, handleError, handleExec };

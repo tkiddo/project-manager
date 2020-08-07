@@ -43,7 +43,7 @@ const TplManage = () => {
         {loading && (
           <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
         )}
-        {loading ? '加载中...' : '刷新'}
+        {loading ? '加载中...' : '更新列表'}
       </Button>
       <Table size="sm" hover>
         <thead className="tpl-table-head">

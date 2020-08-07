@@ -6,7 +6,7 @@ import useDirectory from '../../hooks/useDirectory';
 
 const getTitle = (pathname) => {
   if (pathname === '/') {
-    return '首页';
+    return '欢迎使用';
   }
   const res = menu.find((item) => item.path.indexOf(pathname) !== -1);
   return res.name ? res.name : 'not found';

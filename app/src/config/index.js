@@ -1,6 +1,6 @@
 const menu = [
   {
-    name: '模版管理',
+    name: '项目模版',
     path: '/tplmanage'
   },
   {
