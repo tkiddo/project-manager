@@ -5,6 +5,8 @@ import { ipcRenderer } from 'electron';
 import { Table, Button, Spinner, Badge } from 'react-bootstrap';
 import FormModal from '../../components/FormModal';
 
+import { getBadge } from '../../util';
+
 const TplManage = () => {
   const [list, setList] = useState([]);
   const [modalShow, setModalShow] = useState(false);
@@ -59,7 +61,7 @@ const TplManage = () => {
               <tr key={index}>
                 <th className="tpl-item-name">{name}</th>
                 <th>
-                  <Badge variant="warning">{frame}</Badge>
+                  <Badge variant={getBadge(frame)}>{frame}</Badge>
                 </th>
                 <th className="tpl-item-meta">{meta}</th>
                 <th>

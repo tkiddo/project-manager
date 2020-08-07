@@ -56,7 +56,7 @@ const FormModal = (props) => {
           ))}
           <Form.Group as={Row}>
             <Form.Label column sm={3}>
-              目录
+              项目目录
             </Form.Label>
             <Col sm={9}>
               <InputGroup>
