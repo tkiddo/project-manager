@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './index.scss';
-import { ipcRenderer } from 'electron';
 import { menu } from '../../config';
 import usePathname from '../../hooks/pathname';
+import useDirectory from '../../hooks/useDirectory';
 
 const getTitle = (pathname) => {
   if (pathname === '/') {
@@ -12,22 +12,10 @@ const getTitle = (pathname) => {
   return res.name ? res.name : 'not found';
 };
 
-const Header = (props) => {
+const Header = () => {
   const pathname = usePathname();
 
-  const [local, setLocal] = useState('');
-
-  useEffect(() => {
-    const dir = ipcRenderer.sendSync('get-local-dir');
-    setLocal(dir);
-  }, []);
-
-  const handleChange = () => {
-    ipcRenderer.send('change-dir', 'openDirectory');
-    ipcRenderer.once('selected-dir', (event, arg) => {
-      setLocal(arg);
-    });
-  };
+  const [directory, changeDirectory] = useDirectory();
 
   return (
     <div className="header">
@@ -35,8 +23,9 @@ const Header = (props) => {
       <div className="header-local">
         <span>
           <span style={{ padding: '0 5px' }}>当前工作目录:</span>
-          <span className="local-dir" onClick={handleChange}>
-            {local.replace(/\\/gs, '/')}
+          {/* eslint-disable-next-line */}
+          <span className="local-dir" onClick={changeDirectory}>
+            {directory}
           </span>
         </span>
       </div>

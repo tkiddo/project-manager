@@ -27,8 +27,13 @@ const TplManage = () => {
     getList(false);
   }, []);
 
-  const handleSubmit = (e) => {
-    console.log(e);
+  const handleSubmit = (form) => {
+    ipcRenderer.send('create-template-project', form);
+    ipcRenderer.once('project-created', () => {
+      // eslint-disable-next-line no-alert
+      alert('项目创建成功');
+      setModalShow(false);
+    });
   };
   return (
     <>
@@ -72,7 +77,7 @@ const TplManage = () => {
         onHide={() => setModalShow(false)}
         fields={[
           { field: 'template', label: '模板名称', value: tpl, readonly: true },
-          { filed: 'name', label: '项目名称', value: '', readonly: false },
+          { field: 'name', label: '项目名称', value: '', readonly: false },
           { field: 'description', label: '项目描述', value: '', readonly: false }
         ]}
         title="创建项目"

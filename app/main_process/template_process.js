@@ -1,7 +1,8 @@
 const { ipcMain, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
-const { fetchGit, downloadRepo } = require('./utils');
+const metalsmith = require('metalsmith');
+const { fetchGit, downloadRepo, renderTemplate } = require('./utils');
 const { downloadDirectory } = require('./constants');
 
 module.exports = function local() {
@@ -26,5 +27,31 @@ module.exports = function local() {
     const manifest = require(path.join(dest, 'manifest.json'));
     return event.reply('get-template-list', manifest);
     // event.returnValue = await fetchTemplateList();
+  });
+
+  ipcMain.on('create-template-project', async (event, arg) => {
+    const { template, name, description, directory } = arg;
+    const templateSrc = path.join(
+      downloadDirectory,
+      `.sliver-cli/cli-template/${template}/template`
+    );
+    await new Promise((resolve, reject) => {
+      metalsmith(__dirname)
+        .source(templateSrc)
+        .destination(path.resolve(directory, name))
+        .use((files, metal, done) => {
+          const meta = { name, description };
+          renderTemplate(files, meta);
+          done();
+        })
+        .build((err) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+            event.reply('project-created');
+          }
+        });
+    });
   });
 };
