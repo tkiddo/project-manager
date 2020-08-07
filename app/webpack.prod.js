@@ -5,7 +5,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const PostcssPresetEnv = require('postcss-preset-env');
 const CopyPlugin = require('copy-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const webpack = require('webpack');
 const pkg = require('./package.json');
@@ -41,6 +40,7 @@ const getPublicPath = () => {
 
 module.exports = {
   entry: './src/index.js',
+  target: 'electron-renderer',
   output: {
     // chunkhash:如果打包来源于同一个chunk，那么hash值一样
     // contenthash:根据文件内容是否变化，来改变hash值
@@ -217,9 +217,6 @@ module.exports = {
       filepath: path.resolve(__dirname, 'dll/react.js'),
       outputPath: 'js',
       publicPath: './js'
-    }),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static'
     })
   ]
 };

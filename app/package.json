@@ -2,14 +2,27 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "",
+  "homepage": ".",
   "description": "gui for cli",
   "main": "main.js",
   "scripts": {
     "build": "webpack --progress --config webpack.prod.js",
     "start": "webpack-dev-server --config webpack.dev.js",
     "build-react": "webpack --progress --config webpack.react.js",
-    "electron": "electron ."
+    "electron": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "sliver.gui",
+    "copyright": "sliver",
+    "productName": "sliver-gui",
+    "mac": {
+      "category": "your.app.category.type"
+    },
+    "win": {
+      "icon": "public/favicon.ico"
+    }
   },
   "eslintConfig": {
     "parser": "babel-eslint",

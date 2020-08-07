@@ -21,16 +21,17 @@ function createWindow() {
     }
   });
 
-  /*
-   * 加载应用-----  electron-quick-start中默认的加载入口
-    mainWindow.loadURL(url.format({
-      pathname: path.join(__dirname, 'index.html'),
+  // 加载应用-----  electron-quick-start中默认的加载入口
+  mainWindow.loadURL(
+    url.format({
+      pathname: path.join(__dirname, 'dist/index.html'),
       protocol: 'file:',
       slashes: true
-    }))
-  */
+    })
+  );
+
   // 加载应用----适用于 react 项目
-  mainWindow.loadURL('http://localhost:3000/');
+  // mainWindow.loadURL('http://localhost:3000/');
 
   // 打开开发者工具，默认不打开
   mainWindow.webContents.openDevTools();
