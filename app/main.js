@@ -4,8 +4,6 @@ const path = require('path');
 const url = require('url');
 const mainProcess = require('./main_process/index');
 
-require('electron-reload')(__dirname);
-
 console.log('start');
 
 // 保持window对象的全局引用,避免JavaScript对象被垃圾回收时,窗口被自动关闭.
