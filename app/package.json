@@ -7,20 +7,25 @@
   "description": "gui for cli",
   "main": "main.js",
   "scripts": {
-    "build": "webpack --progress --config webpack.prod.js",
-    "start": "webpack-dev-server --config webpack.dev.js",
+    "build-renderer": "webpack --progress --config webpack.prod.js",
+    "start-renderer": "webpack-dev-server --config webpack.dev.js",
     "build-react": "webpack --progress --config webpack.react.js",
-    "build-main": "webpack --progress --config webpack.main.prod.js",
     "electron": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "postinstall": "electron-builder install-app-deps",
-    "package": "electron-packager ./ package -win=x64 --out=build --arch=x64 --electron-version 9.1.2 --overwrite"
+    "postinstall": "electron-builder install-app-deps"
   },
   "build": {
     "appId": "sliver.gui",
     "copyright": "sliver",
     "productName": "sliver-gui",
+    "files": [
+      "./dist/**/*",
+      "./main.js",
+      "./main_process/**/*",
+      "./node_modules/**/*",
+      "./preload.js"
+    ],
     "mac": {
       "category": "sliver.gui.category"
     },
@@ -125,6 +130,7 @@
     "electron-builder": "^22.8.0",
     "electron-packager": "^15.0.0",
     "electron-reload": "^1.5.0",
+    "electron-webpack": "^2.8.2",
     "eslint": "^7.4.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.11.0",

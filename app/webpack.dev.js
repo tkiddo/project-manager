@@ -36,16 +36,17 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [
+              '@babel/preset-react',
               [
                 '@babel/preset-env',
                 {
+                  targets: { electron: '9.1.2' },
                   useBuiltIns: 'usage',
                   corejs: {
                     version: '3.6',
                     proposals: true
                   }
-                },
-                '@babel/preset-react'
+                }
               ]
             ],
             // 第二次构建时会读取缓存

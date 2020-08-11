@@ -1,7 +1,6 @@
 // 引入electron并创建一个Browserwindow
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
-const url = require('url');
 const mainProcess = require('./main_process/index');
 
 console.log('start');
@@ -15,18 +14,13 @@ function createWindow() {
     width: 1000,
     height: 800,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      preload: path.join(__dirname, 'preload.js')
     }
   });
 
-  // 加载应用-----  electron-quick-start中默认的加载入口
-  mainWindow.loadURL(
-    url.format({
-      pathname: path.join(__dirname, 'dist/index.html'),
-      protocol: 'file:',
-      slashes: true
-    })
-  );
+  // 加载应用-----
+  mainWindow.loadFile('./dist/index.html');
 
   // 加载应用----适用于 react 项目
   // mainWindow.loadURL('http://localhost:3000/');

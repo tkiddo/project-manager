@@ -9,7 +9,7 @@ const getTitle = (pathname) => {
     return '欢迎使用';
   }
   const res = menu.find((item) => item.path.indexOf(pathname) !== -1);
-  return res.name ? res.name : 'not found';
+  return res ? res.name : 'Sliver GUI';
 };
 
 const Header = () => {

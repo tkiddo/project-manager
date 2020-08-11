@@ -48,7 +48,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: getPublicPath()
   },
-  mode: 'production',
+  mode: 'development',
   // 配置开发服务器
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
@@ -101,16 +101,17 @@ module.exports = {
               loader: 'babel-loader',
               options: {
                 presets: [
+                  '@babel/preset-react',
                   [
                     '@babel/preset-env',
                     {
+                      targets: { electron: '9.1.2' },
                       useBuiltIns: 'usage',
                       corejs: {
                         version: '3.6',
                         proposals: true
                       }
-                    },
-                    '@babel/preset-react'
+                    }
                   ]
                 ],
                 // 第二次构建时会读取缓存
@@ -147,12 +148,12 @@ module.exports = {
                     // `resourcePath` - `/absolute/path/to/file.js`
                     // `resourceQuery` - `?foo=bar`
                     if (process.env.NODE_ENV === 'development') {
-                      return '[path][name].[ext]';
+                      return 'media/[path][name].[ext]';
                     }
-                    return '[contenthash].[ext]';
+                    return 'media/[contenthash].[ext]';
                   },
-                  outputPath: 'media',
-                  limit: 8 * 1024
+                  limit: 8 * 1024,
+                  publicPath: './'
                 }
               }
             ],
