@@ -2,8 +2,16 @@ const { ipcMain } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const metalsmith = require('metalsmith');
-const { fetchGit, downloadRepo, renderTemplate, handleError, handleExec } = require('./utils');
+const {
+  fetchGit,
+  downloadRepo,
+  renderTemplate,
+  handleError,
+  handleExec,
+  wirteJson
+} = require('./utils');
 const { downloadDirectory } = require('./constants');
+const projectArray = require('./data/project.json');
 
 module.exports = function local() {
   ipcMain.on('request-template-list', async (event, arg) => {
@@ -50,9 +58,15 @@ module.exports = function local() {
             reject(err);
           } else {
             destination = destination.replace(/\\/g, '/');
-            const gitInitShell = `cd /d ${destination} && git init`;
-            handleExec(gitInitShell);
-            event.reply('project-created');
+            const shell = 'git init';
+            handleExec({
+              destination,
+              shell
+            });
+            projectArray.push({ name, description, destination });
+            wirteJson(path.resolve(__dirname, './data/project.json'), projectArray, () => {
+              event.reply('project-created');
+            });
           }
         });
     });

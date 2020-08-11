@@ -3,8 +3,6 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const mainProcess = require('./main_process/index');
 
-console.log('start');
-
 // 保持window对象的全局引用,避免JavaScript对象被垃圾回收时,窗口被自动关闭.
 let mainWindow;
 
@@ -20,10 +18,10 @@ function createWindow() {
   });
 
   // 加载应用-----
-  mainWindow.loadFile('./dist/index.html');
+  // mainWindow.loadFile('./dist/index.html');
 
   // 加载应用----适用于 react 项目
-  // mainWindow.loadURL('http://localhost:3000/');
+  mainWindow.loadURL('http://localhost:3000/');
 
   // 打开开发者工具，默认不打开
   mainWindow.webContents.openDevTools();

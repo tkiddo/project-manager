@@ -4,9 +4,11 @@ const downloadGitRepo = promisify(require('download-git-repo'));
 const { exec } = require('child_process');
 const { dialog } = require('electron');
 let { render } = require('consolidate').ejs;
+const fs = require('fs');
 
 render = promisify(render);
 
+const { fstat } = require('fs');
 const { downloadDirectory } = require('./constants');
 
 const handleError = (error) => {
@@ -46,8 +48,8 @@ const renderTemplate = (files, data) => {
   });
 };
 
-const handleExec = (shell, callback) => {
-  exec(`${shell}`, (error) => {
+const handleExec = ({ destination, shell }, callback) => {
+  exec(`cd /d ${destination} && ${shell}`, (error) => {
     if (error) {
       handleError(error);
       process.exit(0);
@@ -57,4 +59,15 @@ const handleExec = (shell, callback) => {
   });
 };
 
-module.exports = { fetchGit, downloadRepo, renderTemplate, handleError, handleExec };
+const wirteJson = (file, data, callback) => {
+  const str = JSON.stringify(data, null, '\t');
+  fs.writeFile(file, str, (err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      callback();
+    }
+  });
+};
+
+module.exports = { fetchGit, downloadRepo, renderTemplate, handleError, handleExec, wirteJson };
