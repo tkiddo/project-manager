@@ -68,7 +68,8 @@
       ],
       "react/no-array-index-key": 1,
       "comma-dangle": 0,
-      "object-curly-newline": 0
+      "object-curly-newline": 0,
+      "no-param-reassign": 0
     },
     "env": {
       "browser": true

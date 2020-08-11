@@ -3,6 +3,7 @@ import './index.scss';
 
 import { ipcRenderer } from 'electron';
 import { Table, Button, Spinner, Badge } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import FormModal from '../../components/FormModal';
 
 import { getBadge } from '../../util';
@@ -12,6 +13,7 @@ const TplManage = () => {
   const [modalShow, setModalShow] = useState(false);
   const [loading, setLoading] = useState(true);
   const [tpl, setTpl] = useState(null);
+  const history = useHistory();
 
   const getList = (forced) => {
     setLoading(true);
@@ -32,8 +34,7 @@ const TplManage = () => {
   const handleSubmit = (form) => {
     ipcRenderer.send('create-template-project', form);
     ipcRenderer.once('project-created', () => {
-      // eslint-disable-next-line no-alert
-      alert('项目创建成功');
+      history.push('/projectmanage');
       setModalShow(false);
     });
   };

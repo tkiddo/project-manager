@@ -13,7 +13,7 @@ const {
 const { downloadDirectory } = require('./constants');
 const projectArray = require('./data/project.json');
 
-module.exports = function local() {
+module.exports = function templateProcess() {
   ipcMain.on('request-template-list', async (event, arg) => {
     const manifestSrc = path.join(downloadDirectory, '.sliver-cli/cli-template/manifest.json');
     if (!arg && fs.existsSync(manifestSrc)) {
@@ -63,7 +63,7 @@ module.exports = function local() {
               destination,
               shell
             });
-            projectArray.push({ name, description, destination });
+            projectArray.push({ name, description, destination, template });
             wirteJson(path.resolve(__dirname, './data/project.json'), projectArray, () => {
               event.reply('project-created');
             });

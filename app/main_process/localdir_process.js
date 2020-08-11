@@ -1,7 +1,7 @@
 const { ipcMain, dialog } = require('electron');
 
-module.exports = function local() {
-  ipcMain.on('get-local-dir', (event, arg) => {
+module.exports = function localProcess() {
+  ipcMain.on('get-local-dir', (event) => {
     event.returnValue = process.cwd();
   });
 
