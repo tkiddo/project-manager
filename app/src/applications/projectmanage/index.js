@@ -11,6 +11,9 @@ const ProjectManage = () => {
     const result = ipcRenderer.sendSync('get-project-list');
     setList(result);
   }, []);
+  const handleOpen = (options) => {
+    ipcRenderer.send('open-project', options);
+  };
   return (
     <>
       <Button size="sm" className="create-btn" onClick={() => history.push('/tplmanage')}>
@@ -27,20 +30,20 @@ const ProjectManage = () => {
         </thead>
         <tbody className="table-body">
           {list.map((item, index) => {
-            const { name, template, description } = item;
+            const { name, template, description, destination } = item;
             return (
               <tr key={index}>
                 <th className="table-item project-item-name">{name}</th>
                 <th className="table-item project-item-template">{template}</th>
                 <th className="table-item project-item-description">{description}</th>
                 <th>
-                  <DropdownButton
-                    as={ButtonGroup}
-                    title="编辑器打开"
-                    id="bg-nested-dropdown"
-                    size="sm"
-                  >
-                    <Dropdown.Item eventKey="1">VS Code</Dropdown.Item>
+                  <DropdownButton as={ButtonGroup} title="编辑器打开" size="sm">
+                    <Dropdown.Item
+                      eventKey="1"
+                      onClick={() => handleOpen({ ide: 'vscode', destination, name })}
+                    >
+                      VS Code
+                    </Dropdown.Item>
                   </DropdownButton>
                 </th>
               </tr>
