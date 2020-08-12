@@ -1,86 +1,20 @@
 [
-  {
-    "name": "12121",
-    "description": "111111",
-    "destination": "I:/cli-test/12121",
-    "template": "normal-project"
-  },
-  {
-    "name": "12121",
-    "description": "111111",
-    "destination": "I:/cli-test/12121",
-    "template": "normal-project"
-  },
-  {
-    "name": "12121",
-    "description": "111111",
-    "destination": "I:/cli-test/12121",
-    "template": "normal-project"
-  },
-  {
-    "name": "12121",
-    "description": "111111",
-    "destination": "I:/cli-test/12121",
-    "template": "normal-project"
-  },
-  {
-    "name": "12121",
-    "description": "111111",
-    "destination": "I:/cli-test/12121",
-    "template": "normal-project"
-  },
-  {
-    "name": "12121",
-    "description": "111111",
-    "destination": "I:/cli-test/12121",
-    "template": "normal-project"
-  },
-  {
-    "name": "12121",
-    "description": "111111",
-    "destination": "I:/cli-test/12121",
-    "template": "normal-project"
-  },
-  {
-    "name": "12121",
-    "description": "111111",
-    "destination": "I:/cli-test/12121",
-    "template": "normal-project"
-  },
-  {
-    "name": "12121",
-    "description": "111111",
-    "destination": "I:/cli-test/12121",
-    "template": "normal-project"
-  },
-  {
-    "name": "12121",
-    "description": "111111",
-    "destination": "I:/cli-test/12121",
-    "template": "normal-project"
-  },
-  {
-    "name": "12121",
-    "description": "111111",
-    "destination": "I:/cli-test/12121",
-    "template": "normal-project"
-  },
-  {
-    "name": "12121",
-    "description": "111111",
-    "destination": "I:/cli-test/12121",
-    "template": "normal-project"
-  },
-  {
-    "name": "12121",
-    "description": "111111",
-    "destination": "I:/cli-test/12121",
-    "template": "normal-project"
-  },
-  {
-    "name": "12121",
-    "description": "111111",
-    "destination": "I:/cli-test/12121",
-    "template": "normal-project"
-  }
+	{
+		"name": "lll",
+		"description": "kkk",
+		"destination": "I:/cli-test/lll",
+		"template": "normal-project"
+	},
+	{
+		"name": "474775577",
+		"description": "75878787",
+		"destination": "I:/cli-test/474775577",
+		"template": "react-project"
+	},
+	{
+		"name": "474",
+		"description": "7777",
+		"destination": "I:/cli-test/474",
+		"template": "normal-project"
+	}
 ]

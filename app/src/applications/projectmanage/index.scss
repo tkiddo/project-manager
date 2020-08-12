@@ -1,1 +1,17 @@
 @import '../../assets/style/color.scss';
+
+.create-btn {
+  margin: 10px 20px;
+}
+
+.project-item-name {
+  color: $light-main;
+}
+
+.project-item-template {
+  color: $highlight;
+}
+
+.project-item-description {
+  color: $third;
+}

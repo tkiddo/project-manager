@@ -1,24 +1,10 @@
 @import '../../assets/style/color.scss';
 
-.tpl-table-head {
-  color: $opposite;
-  th {
-    padding: 10px 0;
-    text-align: center;
-  }
+.tpl-item-name {
+  color: $light-main;
 }
-.tpl-table-body {
-  th {
-    font-weight: normal;
-    padding: 10px 0;
-    text-align: center;
-  }
-  .tpl-item-name {
-    color: $light-main;
-  }
-  .tpl-item-meta {
-    color: $highlight;
-  }
+.tpl-item-meta {
+  color: $highlight;
 }
 
 .tpl-fresh {

@@ -63,7 +63,7 @@ module.exports = function templateProcess() {
               destination,
               shell
             });
-            projectArray.push({ name, description, destination, template });
+            projectArray.unshift({ name, description, destination, template });
             wirteJson(path.resolve(__dirname, './data/project.json'), projectArray, () => {
               event.reply('project-created');
             });

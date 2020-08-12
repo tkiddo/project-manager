@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Button, Table, DropdownButton, Dropdown, ButtonGroup } from 'react-bootstrap';
 import { ipcRenderer } from 'electron';
+import { useHistory } from 'react-router-dom';
+import './index.scss';
 
 const ProjectManage = () => {
   const [list, setList] = useState([]);
+  const history = useHistory();
   useEffect(() => {
     const result = ipcRenderer.sendSync('get-project-list');
-    console.log(result);
     setList(result);
   }, []);
   return (
     <>
-      <Button size="sm" className="tpl-fresh">
+      <Button size="sm" className="create-btn" onClick={() => history.push('/tplmanage')}>
         创建项目
       </Button>
       <Table size="sm" hover>
-        <thead className="tpl-table-head">
+        <thead className="table-head">
           <tr>
             <th>名称</th>
             <th>模版</th>
@@ -23,18 +25,23 @@ const ProjectManage = () => {
             <th>操作</th>
           </tr>
         </thead>
-        <tbody className="tpl-table-body">
+        <tbody className="table-body">
           {list.map((item, index) => {
             const { name, template, description } = item;
             return (
               <tr key={index}>
-                <th className="tpl-item-name">{name}</th>
-                <th>{template}</th>
-                <th className="tpl-item-meta">{description}</th>
+                <th className="table-item project-item-name">{name}</th>
+                <th className="table-item project-item-template">{template}</th>
+                <th className="table-item project-item-description">{description}</th>
                 <th>
-                  <Button variant="success" size="sm">
-                    编辑器打开
-                  </Button>
+                  <DropdownButton
+                    as={ButtonGroup}
+                    title="编辑器打开"
+                    id="bg-nested-dropdown"
+                    size="sm"
+                  >
+                    <Dropdown.Item eventKey="1">VS Code</Dropdown.Item>
+                  </DropdownButton>
                 </th>
               </tr>
             );
