@@ -87,6 +87,7 @@ const TplManage = () => {
           { field: 'description', label: '项目描述', value: '', readonly: false }
         ]}
         title="创建项目"
+        confirmText="创建"
         onSubmit={handleSubmit}
       />
     </>

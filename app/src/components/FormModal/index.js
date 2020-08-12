@@ -4,7 +4,7 @@ import { Modal, Button, Form, Row, Col, InputGroup } from 'react-bootstrap';
 import useDirectory from '../../hooks/useDirectory';
 
 const FormModal = (props) => {
-  const { show, onHide, title, fields, onSubmit } = props;
+  const { show, onHide, title, fields, onSubmit, confirmText } = props;
 
   const [directory, changeDirectory] = useDirectory();
 
@@ -72,7 +72,7 @@ const FormModal = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" type="submit">
-            创建
+            {confirmText}
           </Button>
           <Button onClick={onHide} variant="secondary">
             取消

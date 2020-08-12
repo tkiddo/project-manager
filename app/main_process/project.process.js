@@ -1,6 +1,8 @@
 const { ipcMain } = require('electron');
+const fs = require('fs');
+const path = require('path');
 const projectArray = require('./data/project.json');
-const { handleExec } = require('./utils');
+const { handleExec, wirteJson } = require('./utils');
 
 module.exports = function projectProcess() {
   ipcMain.on('get-project-list', (event) => {
@@ -17,6 +19,21 @@ module.exports = function projectProcess() {
 
       default:
         break;
+    }
+  });
+  ipcMain.on('import-project', (event, arg) => {
+    const { directory } = arg;
+    if (fs.existsSync(path.join(directory, 'package.json'))) {
+      const pkg = require(path.join(directory, 'package.json'));
+      projectArray.unshift({
+        name: pkg.name,
+        description: pkg.description,
+        destination: directory,
+        template: 'none'
+      });
+      wirteJson(path.resolve(__dirname, './data/project.json'), projectArray, () => {
+        event.returnValue = projectArray;
+      });
     }
   });
 };
