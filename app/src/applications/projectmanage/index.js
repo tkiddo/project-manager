@@ -25,6 +25,11 @@ const ProjectManage = () => {
     setList(result);
     setModalShow(false);
   };
+  const handleDelete = (idx) => {
+    const result = ipcRenderer.sendSync('delete-project', idx);
+    showToast('项目删除成功！');
+    setList(result);
+  };
   return (
     <>
       <Button size="sm" className="create-btn" onClick={() => history.push('/tplmanage')}>
@@ -59,6 +64,14 @@ const ProjectManage = () => {
                       VS Code
                     </Dropdown.Item>
                   </DropdownButton>
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    className="project-del"
+                    onClick={() => handleDelete(index)}
+                  >
+                    删除
+                  </Button>
                 </th>
               </tr>
             );

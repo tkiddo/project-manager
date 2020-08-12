@@ -1,32 +1,14 @@
 [
 	{
-		"name": "electron",
-		"description": "An electron-vue project",
-		"destination": "F:/electron/vue-electron",
-		"template": "none"
-	},
-	{
-		"name": "electron-quick-start",
-		"description": "A minimal Electron application",
-		"destination": "F:/electron/electron-quick-start",
-		"template": "none"
-	},
-	{
-		"name": "lll",
-		"description": "kkk",
-		"destination": "I:/cli-test/lll",
-		"template": "normal-project"
-	},
-	{
-		"name": "474775577",
-		"description": "75878787",
-		"destination": "I:/cli-test/474775577",
+		"name": "12",
+		"description": "2312",
+		"destination": "I:/cli-test/12",
 		"template": "react-project"
 	},
 	{
-		"name": "474",
-		"description": "7777",
-		"destination": "I:/cli-test/474",
+		"name": "1",
+		"description": "32",
+		"destination": "I:/cli-test/1",
 		"template": "normal-project"
 	}
 ]

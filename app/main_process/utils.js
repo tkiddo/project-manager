@@ -8,7 +8,6 @@ const fs = require('fs');
 
 render = promisify(render);
 
-const { fstat } = require('fs');
 const { downloadDirectory } = require('./constants');
 
 const handleError = (error) => {
@@ -70,4 +69,14 @@ const wirteJson = (file, data, callback) => {
   });
 };
 
-module.exports = { fetchGit, downloadRepo, renderTemplate, handleError, handleExec, wirteJson };
+const isExisted = (destination) => fs.existsSync(destination);
+
+module.exports = {
+  fetchGit,
+  downloadRepo,
+  renderTemplate,
+  handleError,
+  handleExec,
+  wirteJson,
+  isExisted
+};

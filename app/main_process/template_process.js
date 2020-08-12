@@ -8,7 +8,8 @@ const {
   renderTemplate,
   handleError,
   handleExec,
-  wirteJson
+  wirteJson,
+  isExisted
 } = require('./utils');
 const { downloadDirectory } = require('./constants');
 const projectArray = require('./data/project.json');
@@ -45,6 +46,9 @@ module.exports = function templateProcess() {
     );
     await new Promise((resolve, reject) => {
       let destination = path.resolve(directory, name);
+      if (isExisted(destination)) {
+        return handleError('项目已存在！');
+      }
       metalsmith(__dirname)
         .source(templateSrc)
         .destination(destination)
