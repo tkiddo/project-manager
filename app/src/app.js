@@ -3,12 +3,18 @@ import React from 'react';
 import './app.scss';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { ipcRenderer } from 'electron';
 import SideMenu from './components/SideMenu';
 import AppRoute from './route/index';
 import logo from './assets/logo.png';
 import Header from './components/Header';
+import useToast from './hooks/useToast';
 
 function App() {
+  const [showToast] = useToast();
+  ipcRenderer.on('error', (event, arg) => {
+    showToast(arg);
+  });
   return (
     <Container fluid className="app-container">
       <Row>

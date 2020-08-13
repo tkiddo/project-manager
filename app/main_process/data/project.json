@@ -1,14 +1,14 @@
 [
 	{
+		"name": "47",
+		"description": "774",
+		"destination": "I:/cli-test/47",
+		"template": "none"
+	},
+	{
 		"name": "12",
 		"description": "2312",
 		"destination": "I:/cli-test/12",
-		"template": "react-project"
-	},
-	{
-		"name": "1",
-		"description": "32",
-		"destination": "I:/cli-test/1",
-		"template": "normal-project"
+		"template": "none"
 	}
 ]

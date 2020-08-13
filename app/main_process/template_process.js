@@ -44,35 +44,36 @@ module.exports = function templateProcess() {
       downloadDirectory,
       `.sliver-cli/cli-template/${template}/template`
     );
-    await new Promise((resolve, reject) => {
+    await new Promise(() => {
       let destination = path.resolve(directory, name);
-      if (isExisted(destination)) {
-        return handleError('项目已存在！');
+      destination = destination.replace(/\\/g, '/');
+      if (isExisted(destination, projectArray)) {
+        event.reply('error', '项目已存在！');
+      } else {
+        metalsmith(__dirname)
+          .source(templateSrc)
+          .destination(destination)
+          .use((files, metal, done) => {
+            const meta = { name, description };
+            renderTemplate(files, meta);
+            done();
+          })
+          .build((err) => {
+            if (err) {
+              handleError(err);
+            } else {
+              const shell = 'git init';
+              handleExec({
+                destination,
+                shell
+              });
+              projectArray.unshift({ name, description, destination, template });
+              wirteJson(path.resolve(__dirname, './data/project.json'), projectArray, () => {
+                event.reply('project-created');
+              });
+            }
+          });
       }
-      metalsmith(__dirname)
-        .source(templateSrc)
-        .destination(destination)
-        .use((files, metal, done) => {
-          const meta = { name, description };
-          renderTemplate(files, meta);
-          done();
-        })
-        .build((err) => {
-          if (err) {
-            reject(err);
-          } else {
-            destination = destination.replace(/\\/g, '/');
-            const shell = 'git init';
-            handleExec({
-              destination,
-              shell
-            });
-            projectArray.unshift({ name, description, destination, template });
-            wirteJson(path.resolve(__dirname, './data/project.json'), projectArray, () => {
-              event.reply('project-created');
-            });
-          }
-        });
     });
   });
 };

@@ -1,20 +1,22 @@
 const toast = document.createElement('div');
 toast.setAttribute('id', 'toast');
-toast.style =
-  'width:400px;text-align:center;padding:10px 0;background:#fff;box-shadow:0 0 3px #777;position:fixed;top:5px;left:50%;margin-left:-200px;z-index:1000;border-radius:5px;color:#00909e';
+toast.style = `width:400px;text-align:center;padding:10px 0;background:#fff;box-shadow:0 0 3px #777;position:fixed;top:0;left:50%;
+margin-left:-200px;z-index:99999;border-radius:5px;color:#00909e;transform:translateY(-110%);transition:transform ease 0.5s`;
 
 const useToast = () => {
   const root = document.querySelector('#root');
+  if (!document.querySelector('#toast')) {
+    root.appendChild(toast);
+  }
   const hideToast = () => {
-    const ele = document.querySelector('#toast');
-    root.removeChild(ele);
+    toast.style.transform = 'translateY(-110%)';
   };
   const showToast = (text) => {
     toast.innerText = text;
-    root.appendChild(toast);
+    toast.style.transform = 'translateY(5px)';
     setTimeout(() => {
       hideToast();
-    }, 1000);
+    }, 2000);
   };
 
   return [showToast, hideToast];

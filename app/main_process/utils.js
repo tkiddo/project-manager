@@ -69,7 +69,10 @@ const wirteJson = (file, data, callback) => {
   });
 };
 
-const isExisted = (destination) => fs.existsSync(destination);
+const isExisted = (destination, array) => {
+  const idx = array.findIndex((item) => item.destination === destination);
+  return idx !== -1;
+};
 
 module.exports = {
   fetchGit,

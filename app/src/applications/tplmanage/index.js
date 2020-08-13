@@ -82,9 +82,10 @@ const TplManage = () => {
         show={modalShow}
         onHide={() => setModalShow(false)}
         fields={[
-          { field: 'template', label: '模板名称', value: tpl, readonly: true },
-          { field: 'name', label: '项目名称', value: '', readonly: false },
-          { field: 'description', label: '项目描述', value: '', readonly: false }
+          { name: 'template', label: '模板名称', value: tpl, readonly: true, type: 'text' },
+          { name: 'name', label: '项目名称', value: '', readonly: false, type: 'text' },
+          { name: 'description', label: '项目描述', value: '', readonly: false, type: 'text' },
+          { name: 'directory', label: '项目目录', value: '', readonly: false, type: 'directory' }
         ]}
         title="创建项目"
         confirmText="创建"

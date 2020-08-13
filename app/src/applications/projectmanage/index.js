@@ -20,10 +20,12 @@ const ProjectManage = () => {
     ipcRenderer.send('open-project', options);
   };
   const handleSubmit = (form) => {
-    const result = ipcRenderer.sendSync('import-project', form);
-    showToast('项目导入成功！');
-    setList(result);
-    setModalShow(false);
+    ipcRenderer.send('import-project', form);
+    ipcRenderer.once('project-imported', (event, arg) => {
+      showToast('项目导入成功！');
+      setList(arg);
+      setModalShow(false);
+    });
   };
   const handleDelete = (idx) => {
     const result = ipcRenderer.sendSync('delete-project', idx);
@@ -81,7 +83,15 @@ const ProjectManage = () => {
       <FormModal
         show={modalShow}
         onHide={() => setModalShow(false)}
-        fields={[]}
+        fields={[
+          {
+            name: 'directory',
+            type: 'directory',
+            readonly: false,
+            value: '',
+            label: '项目目录'
+          }
+        ]}
         title="导入项目"
         confirmText="导入"
         onSubmit={handleSubmit}

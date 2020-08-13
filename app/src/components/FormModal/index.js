@@ -8,6 +8,38 @@ const FormModal = (props) => {
 
   const [directory, changeDirectory] = useDirectory();
 
+  const renderFormItem = (item) => {
+    if (item.type === 'directory') {
+      return (
+        <>
+          <InputGroup>
+            <Form.Control required type="text" name="directory" size="sm" value={directory} />
+            <InputGroup.Append>
+              <Button variant="outline-secondary" size="sm" onClick={changeDirectory}>
+                Pick
+              </Button>
+            </InputGroup.Append>
+          </InputGroup>
+        </>
+      );
+    }
+    return (
+      <>
+        <Form.Control
+          required
+          type={item.type}
+          placeholder={`输入${item.label}`}
+          readOnly={item.readonly}
+          defaultValue={item.value}
+          plaintext={item.readonly}
+          name={item.name}
+          size="sm"
+        />
+        <Form.Control.Feedback type="invalid">{`请输入${item.label}`}</Form.Control.Feedback>
+      </>
+    );
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -15,10 +47,10 @@ const FormModal = (props) => {
     if (form.checkValidity() === true) {
       const data = {};
       fields.forEach((item) => {
-        const key = item.field;
+        const key = item.name;
         data[key] = form[key].value;
       });
-      onSubmit({ ...data, directory });
+      onSubmit(data);
     }
   };
   return (
@@ -39,36 +71,9 @@ const FormModal = (props) => {
               <Form.Label column sm={3}>
                 {item.label}
               </Form.Label>
-              <Col sm={9}>
-                <Form.Control
-                  required
-                  type="text"
-                  placeholder={`输入${item.label}`}
-                  readOnly={item.readonly}
-                  defaultValue={item.value}
-                  plaintext={item.readonly}
-                  name={item.field}
-                  size="sm"
-                />
-                <Form.Control.Feedback type="invalid">{`请输入${item.label}`}</Form.Control.Feedback>
-              </Col>
+              <Col sm={9}>{renderFormItem(item)}</Col>
             </Form.Group>
           ))}
-          <Form.Group as={Row}>
-            <Form.Label column sm={3}>
-              项目目录
-            </Form.Label>
-            <Col sm={9}>
-              <InputGroup>
-                <Form.Control required type="text" name="directory" size="sm" value={directory} />
-                <InputGroup.Append>
-                  <Button variant="outline-secondary" size="sm" onClick={changeDirectory}>
-                    Pick
-                  </Button>
-                </InputGroup.Append>
-              </InputGroup>
-            </Col>
-          </Form.Group>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" type="submit">
