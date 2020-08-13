@@ -1,0 +1,24 @@
+{
+  "name": "spider",
+  "version": "1.0.0",
+  "description": "spider",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "spider"
+  ],
+  "author": "sliver",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.5.0",
+    "eslint-config-airbnb-base": "^14.2.0"
+  },
+  "dependencies": {
+    "request": "^2.88.2",
+    "xmldom": "^0.3.0",
+    "xpath": "^0.0.27"
+  }
+}
