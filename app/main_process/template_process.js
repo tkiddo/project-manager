@@ -11,18 +11,18 @@ const {
   wirteJson,
   isExisted
 } = require('./utils');
-const { downloadDirectory } = require('./constants');
+const { downloadDirectory, templateApi } = require('./constants');
 const projectArray = require('./data/project.json');
 
 module.exports = function templateProcess() {
   ipcMain.on('request-template-list', async (event, arg) => {
-    const manifestSrc = path.join(downloadDirectory, '.sliver-cli/cli-template/manifest.json');
+    const manifestSrc = path.join(downloadDirectory, `${templateApi.downloadDir}/manifest.json`);
     if (!arg && fs.existsSync(manifestSrc)) {
       // eslint-disable-next-line
       const result = require(manifestSrc);
       return event.reply('get-template-list', result);
     }
-    const url = 'https://api.github.com/repos/sliver-cli/cli-template';
+    const url = templateApi.RepoUrl;
     let data;
     try {
       data = await fetchGit(url);
@@ -35,14 +35,13 @@ module.exports = function templateProcess() {
     // eslint-disable-next-line
     const manifest = require(path.join(dest, 'manifest.json'));
     return event.reply('get-template-list', manifest);
-    // event.returnValue = await fetchTemplateList();
   });
 
   ipcMain.on('create-template-project', async (event, arg) => {
     const { template, name, description, directory } = arg;
     const templateSrc = path.join(
       downloadDirectory,
-      `.sliver-cli/cli-template/${template}/template`
+      `${templateApi.downloadDir}/${template}/template`
     );
     await new Promise(() => {
       let destination = path.resolve(directory, name);
