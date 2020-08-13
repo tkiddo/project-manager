@@ -8,8 +8,8 @@ const menu = [
     path: '/tplmanage'
   },
   {
-    name: '代码片段',
-    path: '/home'
+    name: 'Eslint生成',
+    path: '/eslintmanage'
   }
 ];
 
