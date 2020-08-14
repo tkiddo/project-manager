@@ -1,5 +1,5 @@
 .eslint-manage {
-  height: calc(100% - 50px);
+  height: calc(100% - 75px);
 }
 
 .rule-list {
@@ -7,6 +7,10 @@
   overflow-y: scroll;
 }
 
+.eslint-form {
+  padding: 10px;
+}
+
 .reset {
-  margin: 10px;
+  margin-right: 10px;
 }
