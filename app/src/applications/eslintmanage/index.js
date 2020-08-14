@@ -1,35 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ipcRenderer } from 'electron';
-import { Table, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import RuleItem from './ruleItem';
 import './index.scss';
 
 const EslintManage = () => {
   const rules = ipcRenderer.sendSync('get-eslint-rules');
+  const [json, setJson] = useState({ rules: {} });
+  const handleConfig = () => (config) => {
+    setJson({ rules: { ...json.rules, ...config } });
+  };
   return (
     <>
-      <Table size="sm" hover>
-        <thead className="table-head">
-          <tr>
-            <th>规则</th>
-            <th>描述</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <tbody className="table-body">
-          {rules.map((item, index) => {
-            const { name, description } = item;
-            return (
-              <tr key={index}>
-                <th className="table-item project-item-name">{name}</th>
-                <th className="table-item project-item-description">{description}</th>
-                <th>
-                  <Button size="sm">配置</Button>
-                </th>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+      <Button size="sm" className="reset" onClick={() => setJson({ rules: {} })}>
+        重置
+      </Button>
+      <Container fluid className="eslint-manage">
+        <Row>
+          <Col md={5} lg={3} className="rule-list">
+            {rules.map((item) => {
+              const { name } = item;
+              return <RuleItem name={name} key={name} onConfig={handleConfig} />;
+            })}
+          </Col>
+          <Col md={7} lg={9}>
+            <pre>
+              <code>{`${JSON.stringify(json, null, 2)}`}</code>
+            </pre>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };

@@ -26,7 +26,9 @@ function App() {
         </Col>
         <Col md={10} className="app-right">
           <Header />
-          <AppRoute />
+          <div className="app-main">
+            <AppRoute />
+          </div>
         </Col>
       </Row>
     </Container>

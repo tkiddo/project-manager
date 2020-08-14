@@ -22,6 +22,14 @@
     height: 100%;
     background-color: #fff;
     padding: 0;
+    position: relative;
+    .app-main {
+      position: absolute;
+      top: 44px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
   }
   .app-logo {
     width: 70px;
