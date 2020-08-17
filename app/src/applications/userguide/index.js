@@ -1,9 +1,9 @@
 import React from 'react';
 import './index.scss';
 
-const Welcome = () => (
+const UserGuide = () => (
   <div className="welcome">
-    <h3>使用指南</h3>
+    <h3>用户指南</h3>
     <ul>
       <li>
         <h5>项目模版</h5>
@@ -21,8 +21,16 @@ const Welcome = () => (
         <div>先将IDE添加到环境变量，然后就能使用编辑器打开项目了</div>
         <div>创建项目，导入项目和删除项目</div>
       </li>
+      <li>
+        <h5>Eslint规则</h5>
+        <div>Eslint规则查询，配置，以及复制.eslintrc</div>
+      </li>
+      <li>
+        <h5>任务管理</h5>
+        <div>创建任务，完成任务，删除任务</div>
+      </li>
     </ul>
   </div>
 );
 
-export default Welcome;
+export default UserGuide;

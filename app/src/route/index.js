@@ -1,17 +1,22 @@
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import React from 'react';
 
-import Welcome from '../applications/welcome';
+import UserGuide from '../applications/userguide';
 import TplManage from '../applications/tplmanage';
 import ProjectManage from '../applications/projectmanage';
 import EslintManage from '../applications/eslintmanage';
+import Taskmanage from '../applications/taskmanage';
 
 const AppRoute = () => (
   <Switch>
-    <Route path="/" exact component={Welcome} />
+    <Route path="/userguide" component={UserGuide} />
     <Route path="/tplmanage" component={TplManage} />
     <Route path="/projectmanage" component={ProjectManage} />
     <Route path="/eslintmanage" component={EslintManage} />
+    <Route path="/taskmanage" component={Taskmanage} />
+    <Route path="/" exact>
+      <Redirect to="/userguide" />
+    </Route>
   </Switch>
 );
 

@@ -28,8 +28,16 @@ const EslintManage = () => {
     }
     setList(result);
   };
+
+  const handleEnter = (e) => {
+    setKeyword(e.currentTarget.value);
+    if (e.keyCode === 13) {
+      handleSearch();
+    }
+  };
+
   return (
-    <>
+    <Container fluid className="eslint-manage padding-top-10">
       <Form className="eslint-form">
         <Form.Row>
           <Col md={8}>
@@ -42,7 +50,10 @@ const EslintManage = () => {
                   placeholder="请输入Eslint规则"
                   onChange={handleInput}
                   value={keyword}
+                  onKeyUp={handleEnter}
                 />
+                {/* 防止回车键提交表单 */}
+                <input style={{ display: 'none' }} />
                 <InputGroup.Append>
                   <Button variant="primary" size="sm" onClick={handleSearch}>
                     搜索
@@ -71,33 +82,25 @@ const EslintManage = () => {
           </Col>
         </Form.Row>
       </Form>
-
-      <Container fluid className="eslint-manage">
-        <Row>
-          <Col md={5} lg={3} className="rule-list">
-            {list.map((item) => {
-              const { name, description } = item;
-              return (
-                <RuleItem
-                  name={name}
-                  key={name}
-                  onConfig={handleConfig}
-                  description={description}
-                />
-              );
-            })}
-          </Col>
-          <Col md={7} lg={9}>
-            <h5>
-              <Badge>.eslintrc</Badge>
-            </h5>
-            <pre>
-              <code>{`${JSON.stringify(json, null, 2)}`}</code>
-            </pre>
-          </Col>
-        </Row>
-      </Container>
-    </>
+      <Row>
+        <Col md={5} className="rule-list">
+          {list.map((item) => {
+            const { name, description } = item;
+            return (
+              <RuleItem name={name} key={name} onConfig={handleConfig} description={description} />
+            );
+          })}
+        </Col>
+        <Col md={7}>
+          <h5>
+            <Badge>.eslintrc</Badge>
+          </h5>
+          <pre>
+            <code>{`${JSON.stringify(json, null, 2)}`}</code>
+          </pre>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
