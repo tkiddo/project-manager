@@ -53,7 +53,8 @@ const TaskManage = () => {
             readonly: true,
             value: new Date().toLocaleString()
           },
-          { name: 'content', label: '笔记内容', as: 'textarea', required: true }
+          { name: 'content', label: '笔记内容', as: 'textarea', required: true },
+          { name: 'priority', label: '优先级', as: 'select', options: [1, 2, 3] }
         ]}
       />
     </Container>
