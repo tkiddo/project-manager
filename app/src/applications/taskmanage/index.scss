@@ -13,13 +13,6 @@
   column-count: 3;
   width: 100%;
   column-gap: 1em;
-  .card-item {
-    break-inside: avoid;
-    margin-bottom: 10px;
-    .card-title {
-      font-size: 14px;
-    }
-  }
 }
 
 .task-btn-group {

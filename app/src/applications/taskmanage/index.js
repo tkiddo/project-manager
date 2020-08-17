@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './index.scss';
-import { Container, Button, Card } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 import FormModal from '../../components/FormModal';
+import TaskItem from './taskItem';
 
 const TaskManage = () => {
   const [list, setList] = useState([]);
@@ -28,14 +29,11 @@ const TaskManage = () => {
       <div className="scroll-wrapper">
         <div className="list-container">
           {list.map((item) => (
-            <Container className="card-item">
-              <Card bg="info" text="light">
-                <Card.Header className="card-title">{item.createTime}</Card.Header>
-                <Card.Body>
-                  <Card.Text>{item.content}</Card.Text>
-                </Card.Body>
-              </Card>
-            </Container>
+            <TaskItem
+              createTime={item.createTime}
+              content={item.content}
+              priority={item.priority}
+            />
           ))}
         </div>
       </div>

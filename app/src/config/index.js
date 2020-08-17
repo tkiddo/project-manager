@@ -16,7 +16,7 @@ const menu = [
     path: '/eslintmanage'
   },
   {
-    name: '便利贴',
+    name: '任务管理',
     path: '/taskmanage'
   }
 ];

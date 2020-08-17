@@ -23,6 +23,15 @@ const FormModal = (props) => {
         </>
       );
     }
+    if (item.as === 'select') {
+      return (
+        <>
+          <Form.Control as="select" name={item.name}>
+            {item.as === 'select' && item.options.map((op) => <option>{op}</option>)}
+          </Form.Control>
+        </>
+      );
+    }
     return (
       <>
         <Form.Control
