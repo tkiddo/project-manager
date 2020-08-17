@@ -89,7 +89,8 @@ const ProjectManage = () => {
             type: 'directory',
             readonly: false,
             value: '',
-            label: '项目目录'
+            label: '项目目录',
+            required: true
           }
         ]}
         title="导入项目"

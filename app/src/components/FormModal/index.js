@@ -13,7 +13,7 @@ const FormModal = (props) => {
       return (
         <>
           <InputGroup>
-            <Form.Control required type="text" name="directory" size="sm" value={directory} />
+            <Form.Control required as="input" name="directory" size="sm" value={directory} />
             <InputGroup.Append>
               <Button variant="outline-secondary" size="sm" onClick={changeDirectory}>
                 Pick
@@ -26,8 +26,9 @@ const FormModal = (props) => {
     return (
       <>
         <Form.Control
-          required
-          type={item.type}
+          required={item.required || false}
+          type={item.type || 'text'}
+          as={item.as || 'input'}
           placeholder={`输入${item.label}`}
           readOnly={item.readonly}
           defaultValue={item.value}
@@ -35,7 +36,6 @@ const FormModal = (props) => {
           name={item.name}
           size="sm"
         />
-        <Form.Control.Feedback type="invalid">{`请输入${item.label}`}</Form.Control.Feedback>
       </>
     );
   };
@@ -60,24 +60,26 @@ const FormModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
       className="form-modal"
+      dialogClassName="modal-60w"
     >
       <Form onSubmit={handleSubmit}>
         <Modal.Header>
           <Modal.Title id="contained-modal-title-vcenter">{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {fields.map((item) => (
-            <Form.Group as={Row}>
-              <Form.Label column sm={3}>
-                {item.label}
-              </Form.Label>
-              <Col sm={9}>{renderFormItem(item)}</Col>
-            </Form.Group>
-          ))}
+          {fields &&
+            fields.map((item) => (
+              <Form.Group as={Row}>
+                <Form.Label column sm={3}>
+                  {item.label}
+                </Form.Label>
+                <Col sm={9}>{renderFormItem(item)}</Col>
+              </Form.Group>
+            ))}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" type="submit">
-            {confirmText}
+            {confirmText || '确定'}
           </Button>
           <Button onClick={onHide} variant="secondary">
             取消
