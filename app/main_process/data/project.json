@@ -1,1 +1,8 @@
-[]
+[
+	{
+		"name": "121212121",
+		"description": "11111",
+		"destination": "I:/cli-test/121212121",
+		"template": "none"
+	}
+]

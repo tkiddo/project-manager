@@ -60,13 +60,12 @@ const handleExec = ({ destination, shell }, callback) => {
 
 const wirteJson = (file, data, callback) => {
   const str = JSON.stringify(data, null, '\t');
-  fs.writeFile(file, str, (err) => {
-    if (err) {
-      console.error(err);
-    } else {
-      callback();
-    }
-  });
+  try {
+    fs.writeFileSync(file, str);
+    callback();
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const isExisted = (destination, array) => {

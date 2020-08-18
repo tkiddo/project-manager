@@ -1,7 +1,13 @@
+@import '../../../assets/style/color.scss';
+
 .card-item {
   break-inside: avoid;
   margin-bottom: 10px;
-  .card-title {
-    font-size: 14px;
+  position: relative;
+  .task-item-btns {
+    text-align: right;
+    .task-item-btn {
+      margin-right: 10px;
+    }
   }
 }
