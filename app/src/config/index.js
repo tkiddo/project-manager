@@ -18,6 +18,10 @@ const menu = [
   {
     name: '任务管理',
     path: '/taskmanage'
+  },
+  {
+    name: '组件模版',
+    path: '/comptemplate'
   }
 ];
 

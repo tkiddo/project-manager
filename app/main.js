@@ -1,5 +1,5 @@
 // 引入electron并创建一个Browserwindow
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 const path = require('path');
 const mainProcess = require('./main_process/index');
 
@@ -7,6 +7,8 @@ const mainProcess = require('./main_process/index');
 let mainWindow;
 
 function createWindow() {
+  // 隐藏菜单栏
+  Menu.setApplicationMenu(null);
   // 创建浏览器窗口,宽高自定义具体大小你开心就好
   mainWindow = new BrowserWindow({
     width: 1000,
