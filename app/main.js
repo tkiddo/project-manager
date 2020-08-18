@@ -18,10 +18,10 @@ function createWindow() {
     }
   });
 
-  // 加载应用-----
+  // 加载应用-----适用于生产模式
   // mainWindow.loadFile('./dist/index.html');
 
-  // 加载应用----适用于 react 项目
+  // 加载应用----适用于开发模式
   mainWindow.loadURL('http://localhost:3000/');
 
   // 打开开发者工具，默认不打开
