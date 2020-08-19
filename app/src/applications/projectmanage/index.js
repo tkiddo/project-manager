@@ -56,6 +56,7 @@ const ProjectManage = () => {
           {list.map((item, index) => {
             const { name, template, description, destination } = item;
             return (
+              // eslint-disable-next-line react/no-array-index-key
               <tr key={index}>
                 <th className="table-item project-item-name">{name}</th>
                 <th className="table-item project-item-template">{template}</th>

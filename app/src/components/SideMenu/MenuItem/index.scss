@@ -12,7 +12,7 @@
     color: $light-main;
   }
   &.active-menu {
-    background-color: $light-main;
-    color: $main;
+    background-color: $opposite;
+    color: $light-main;
   }
 }

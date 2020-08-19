@@ -65,6 +65,7 @@ const TplManage = () => {
           {list.map((item, index) => {
             const { name, frame, meta } = item;
             return (
+              // eslint-disable-next-line react/no-array-index-key
               <tr key={index}>
                 <th className="tpl-item-name table-item">{name}</th>
                 <th>

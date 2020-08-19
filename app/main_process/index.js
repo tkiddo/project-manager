@@ -4,6 +4,7 @@ const template = require('./template_process');
 const project = require('./project.process');
 const eslint = require('./eslint_process');
 const task = require('./task_process');
+const component = require('./component_process');
 
 module.exports = function mainProcess() {
   localDir();
@@ -11,4 +12,5 @@ module.exports = function mainProcess() {
   project();
   eslint();
   task();
+  component();
 };

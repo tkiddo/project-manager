@@ -1,6 +1,7 @@
-$main: #d8dfe2;
-$light-main: #40bad5;
-$opposite: #0d3446;
-$dark-main: #00909e;
-$third: #176d81;
-$highlight: #ff5200;
+$main: var(--secondary);
+$light-main: var(--teal);
+$opposite: var(--white);
+$primary: var(--primary);
+$third: var(--indigo);
+$highlight: var(--pink);
+$text-dark: var(--dark);

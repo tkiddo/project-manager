@@ -2,7 +2,7 @@
 @import './assets/style/color.scss';
 
 body {
-  color: $opposite;
+  color: $text-dark;
   overflow: hidden;
 }
 
@@ -41,7 +41,7 @@ tbody tr {
 }
 
 .table-head {
-  color: $opposite;
+  color: $text-dark;
   th {
     padding: 10px 0;
     text-align: center;
