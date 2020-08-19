@@ -26,7 +26,8 @@ const menu = [
 ];
 
 const api = {
-  baseUrl: ''
+  baseUrl: '',
+  ReactComponentPreviewUrl: 'https://sliver-cli.github.io/react-component/#/'
 };
 
 export { menu, api };

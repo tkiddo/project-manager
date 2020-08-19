@@ -1,19 +1,20 @@
-const downloadDirectory = `${process.env[process.platform === 'darwin' ? 'HOME' : 'USERPROFILE']}`;
+const downloadRootDir = `${process.env[process.platform === 'darwin' ? 'HOME' : 'USERPROFILE']}`;
 const version = '1.0.0';
 
 const projectTemplateApi = {
-  RepoUrl: 'https://api.github.com/repos/sliver-cli/project-template',
+  repoUrl: 'https://api.github.com/repos/sliver-cli/project-template',
   downloadDir: '.sliver-cli/project-template'
 };
 
-const componentTemplateApi = {
-  RepoUrl: 'https://api.github.com/repos/sliver-cli/component-template',
-  downloadDir: '.sliver-cli/component-template'
+const reactComponentApi = {
+  repoUrl: 'https://api.github.com/repos/sliver-cli/react-component',
+  previewUrl: 'https://sliver-cli.github.io/react-component/#/',
+  downloadDir: '.sliver-cli/react-component'
 };
 
 module.exports = {
-  downloadDirectory,
+  downloadRootDir,
   version,
   projectTemplateApi,
-  componentTemplateApi
+  reactComponentApi
 };

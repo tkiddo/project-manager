@@ -8,7 +8,7 @@ const fs = require('fs');
 
 render = promisify(render);
 
-const { downloadDirectory } = require('./constants');
+const { downloadRootDir } = require('./constants');
 
 const handleError = (error) => {
   dialog.showErrorBox('boom!', JSON.stringify(error));
@@ -26,7 +26,7 @@ const fetchGit = async (url) => {
 
 // eslint-disable-next-line camelcase
 const downloadRepo = async ({ name, full_name }) => {
-  const dest = `${downloadDirectory}/.sliver-cli/${name}`;
+  const dest = `${downloadRootDir}/.sliver-cli/${name}`;
   await downloadGitRepo(full_name, dest);
   return dest;
 };

@@ -11,13 +11,13 @@ const {
   wirteJson,
   isExisted
 } = require('./utils');
-const { downloadDirectory, projectTemplateApi } = require('./constants');
+const { downloadRootDir, projectTemplateApi } = require('./constants');
 const projectArray = require('./data/project.json');
 
 module.exports = function templateProcess() {
   ipcMain.on('request-template-list', async (event, arg) => {
     const manifestSrc = path.join(
-      downloadDirectory,
+      downloadRootDir,
       `${projectTemplateApi.downloadDir}/manifest.json`
     );
     if (!arg && fs.existsSync(manifestSrc)) {
@@ -25,7 +25,7 @@ module.exports = function templateProcess() {
       const result = require(manifestSrc);
       return event.reply('get-template-list', result);
     }
-    const url = projectTemplateApi.RepoUrl;
+    const url = projectTemplateApi.repoUrl;
     let data;
     try {
       data = await fetchGit(url);
@@ -43,7 +43,7 @@ module.exports = function templateProcess() {
   ipcMain.on('create-template-project', async (event, arg) => {
     const { template, name, description, directory } = arg;
     const templateSrc = path.join(
-      downloadDirectory,
+      downloadRootDir,
       `${projectTemplateApi.downloadDir}/${template}/template`
     );
     await new Promise(() => {
