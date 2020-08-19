@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './index.scss';
 
 import { ipcRenderer } from 'electron';
-import { Table, Button, Spinner, Badge } from 'react-bootstrap';
+import { Table, Button, Spinner, Badge, Container } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import FormModal from '../../components/FormModal';
 import useToast from '../../hooks/useToast';
@@ -43,12 +43,15 @@ const TplManage = () => {
   };
   return (
     <>
-      <Button size="sm" className="tpl-fresh" onClick={() => getList(true)}>
-        {loading && (
-          <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
-        )}
-        {loading ? '加载中...' : '更新列表'}
-      </Button>
+      <Container className="top-menu-bar" fluid>
+        <Button size="sm" className="margin-left-10" onClick={() => getList(true)}>
+          {loading && (
+            <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+          )}
+          {loading ? '加载中...' : '更新列表'}
+        </Button>
+      </Container>
+
       <Table size="sm" hover>
         <thead className="table-head">
           <tr>

@@ -37,8 +37,8 @@ const EslintManage = () => {
   };
 
   return (
-    <Container fluid className="eslint-manage padding-top-10">
-      <Form className="eslint-form">
+    <Container fluid className="eslint-manage">
+      <Form className="top-menu-bar">
         <Form.Row>
           <Col md={8}>
             <Form.Group>
@@ -63,17 +63,12 @@ const EslintManage = () => {
             </Form.Group>
           </Col>
           <Col md={4}>
-            <Button
-              size="sm"
-              className="reset"
-              onClick={() => setJson({ rules: {} })}
-              variant="secondary"
-            >
+            <Button size="sm" onClick={() => setJson({ rules: {} })} variant="secondary">
               重置
             </Button>
             <Button
               size="sm"
-              className="reset"
+              className="margin-left-10"
               onClick={() => setJson({ rules: {} })}
               variant="success"
             >

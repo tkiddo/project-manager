@@ -38,15 +38,15 @@ const TaskManage = () => {
     setList(result);
   };
   return (
-    <Container fluid className="task-manage padding-top-10">
-      <div className="task-btn-group">
-        <Button variant="primary" size="sm" className="reset" onClick={() => setModalShow(true)}>
+    <Container fluid>
+      <Container fluid className="top-menu-bar">
+        <Button variant="primary" size="sm" onClick={() => setModalShow(true)}>
           添加
         </Button>
-        <Button size="sm" className="reset" variant="secondary" onClick={handleEmpty}>
+        <Button size="sm" className="margin-left-10" variant="secondary" onClick={handleEmpty}>
           清空
         </Button>
-      </div>
+      </Container>
 
       <div className="scroll-wrapper">
         <div className="list-container">

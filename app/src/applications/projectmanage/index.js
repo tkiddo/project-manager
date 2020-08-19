@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Table, DropdownButton, Dropdown, ButtonGroup } from 'react-bootstrap';
+import { Button, Table, DropdownButton, Dropdown, ButtonGroup, Container } from 'react-bootstrap';
 import { ipcRenderer } from 'electron';
 import { useHistory } from 'react-router-dom';
 import FormModal from '../../components/FormModal';
@@ -34,12 +34,15 @@ const ProjectManage = () => {
   };
   return (
     <>
-      <Button size="sm" className="create-btn" onClick={() => history.push('/tplmanage')}>
-        创建项目
-      </Button>
-      <Button size="sm" className="create-btn" onClick={() => setModalShow(true)}>
-        导入项目
-      </Button>
+      <Container className="top-menu-bar" fluid>
+        <Button size="sm" className="margin-left-10" onClick={() => history.push('/tplmanage')}>
+          创建项目
+        </Button>
+        <Button size="sm" className="margin-left-10" onClick={() => setModalShow(true)}>
+          导入项目
+        </Button>
+      </Container>
+
       <Table size="sm" hover>
         <thead className="table-head">
           <tr>
