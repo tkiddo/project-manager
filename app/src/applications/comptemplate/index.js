@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './index.scss';
-import { Container, Tabs, Tab } from 'react-bootstrap';
+import { Container, Tabs, Tab, Button, Spinner } from 'react-bootstrap';
 import { ipcRenderer } from 'electron';
 import CustomScroll from '../../components/CustomScroll';
 import ComponentItem from './compItem';
@@ -9,24 +9,32 @@ import useToast from '../../hooks/useToast';
 
 const CompTemplate = () => {
   const [type, setType] = useState('react');
-  const [list, setList] = useState([]);
+  const [listState, setListState] = useState({
+    list: [],
+    loading: false,
+    selectedItem: null
+  });
   const [modalShow, setModalShow] = useState(false);
-  const [selectedItem, setSelectItem] = useState(null);
   const [showToast] = useToast();
-  useEffect(() => {
-    ipcRenderer.send('request-component-list', { type });
+
+  const getList = (forced) => {
+    ipcRenderer.send('request-component-list', { type, forced });
+    setListState({ ...listState, loading: true });
     ipcRenderer.once('get-component-list', (event, arg) => {
-      setList(arg);
+      setListState({ ...listState, list: arg, loading: false });
     });
+  };
+  useEffect(() => {
+    getList(false);
   }, []);
 
   const handleSelect = (item) => {
-    setSelectItem(item);
+    setListState({ ...listState, selectedItem: item });
     setModalShow(true);
   };
 
   const handleSubmit = (form) => {
-    const data = { ...form, ...selectedItem };
+    const data = { ...form, ...listState.selectedItem };
     ipcRenderer.send('create-component', data);
     ipcRenderer.once('component-created', () => {
       showToast('组件创建成功！');
@@ -39,7 +47,7 @@ const CompTemplate = () => {
         <Tab eventKey="react" title="React组件">
           <CustomScroll height="600px">
             <div className="comp-list">
-              {list.map((item) => {
+              {listState.list.map((item) => {
                 const { name, description, title, filepath } = item;
                 return (
                   <ComponentItem
@@ -64,6 +72,14 @@ const CompTemplate = () => {
           微信小程序组件
         </Tab>
       </Tabs>
+      <Container className="top-menu-bar" fluid>
+        <Button size="sm" className="margin-left-10" onClick={() => getList(true)}>
+          {listState.loading && (
+            <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+          )}
+          {listState.loading ? '加载中...' : '手动更新'}
+        </Button>
+      </Container>
       <FormModal
         show={modalShow}
         onHide={() => setModalShow(false)}

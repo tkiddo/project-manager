@@ -12,16 +12,16 @@ const menu = [
     path: '/tplmanage'
   },
   {
+    name: '组件模版',
+    path: '/comptemplate'
+  },
+  {
     name: 'Eslint规则',
     path: '/eslintmanage'
   },
   {
     name: '任务管理',
     path: '/taskmanage'
-  },
-  {
-    name: '组件模版',
-    path: '/comptemplate'
   }
 ];
 

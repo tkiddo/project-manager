@@ -11,7 +11,9 @@ const useDirectory = () => {
   const handleChange = () => {
     ipcRenderer.send('change-dir', 'openDirectory');
     ipcRenderer.once('selected-dir', (event, arg) => {
-      setLocal(arg.replace(/\\/gs, '/'));
+      if (arg) {
+        setLocal(arg.replace(/\\/gs, '/'));
+      }
     });
   };
 

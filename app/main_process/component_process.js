@@ -7,12 +7,12 @@ const { downloadRootDir, componentTemplateApi } = require('./constants');
 
 module.exports = function componentProcess() {
   ipcMain.on('request-component-list', async (event, arg) => {
-    const { type } = arg;
+    const { type, forced } = arg;
     const manifestSrc = path.join(
       downloadRootDir,
       `${componentTemplateApi[type].downloadDir}/manifest.json`
     );
-    if (fs.existsSync(manifestSrc)) {
+    if (!forced && fs.existsSync(manifestSrc)) {
       // eslint-disable-next-line
       const result = require(manifestSrc);
       return event.reply('get-component-list', result);

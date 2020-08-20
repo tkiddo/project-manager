@@ -10,23 +10,25 @@ import useToast from '../../hooks/useToast';
 import { getBadge } from '../../util';
 
 const TplManage = () => {
-  const [list, setList] = useState([]);
+  const [listState, setListState] = useState({
+    list: [],
+    loading: false,
+    selectedItem: null
+  });
   const [modalShow, setModalShow] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [tpl, setTpl] = useState(null);
+
   const [showToast] = useToast();
   const history = useHistory();
 
   const getList = (forced) => {
-    setLoading(true);
+    setListState({ ...listState, loading: true });
     ipcRenderer.send('request-template-list', forced);
     ipcRenderer.once('get-template-list', (event, arg) => {
-      setLoading(false);
-      setList(arg);
+      setListState({ ...listState, loading: false, list: arg });
     });
   };
   const handleSelect = (item) => {
-    setTpl(item);
+    setListState({ ...listState, selectedItem: item });
     setModalShow(true);
   };
   useEffect(() => {
@@ -45,10 +47,10 @@ const TplManage = () => {
     <>
       <Container className="top-menu-bar" fluid>
         <Button size="sm" className="margin-left-10" onClick={() => getList(true)}>
-          {loading && (
+          {listState.loading && (
             <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
           )}
-          {loading ? '加载中...' : '更新列表'}
+          {listState.loading ? '加载中...' : '手动更新'}
         </Button>
       </Container>
 
@@ -62,7 +64,7 @@ const TplManage = () => {
           </tr>
         </thead>
         <tbody className="table-body">
-          {list.map((item, index) => {
+          {listState.list.map((item, index) => {
             const { name, frame, meta } = item;
             return (
               // eslint-disable-next-line react/no-array-index-key
@@ -89,7 +91,7 @@ const TplManage = () => {
           {
             name: 'template',
             label: '模板名称',
-            value: tpl,
+            value: listState.selectedItem,
             readonly: true,
             type: 'text',
             required: true

@@ -36,7 +36,10 @@ function createWindow() {
 }
 
 // 当 Electron 完成初始化并准备创建浏览器窗口时调用此方法
-app.on('ready', createWindow);
+app.on('ready', () => {
+  createWindow();
+  mainProcess();
+});
 
 // 所有窗口关闭时退出应用.
 app.on('window-all-closed', () => {
@@ -52,5 +55,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-mainProcess();
