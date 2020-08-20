@@ -1,21 +1,23 @@
 const { ipcMain } = require('electron');
 const path = require('path');
 const fs = require('fs');
+const metalsmith = require('metalsmith');
 const { fetchGit, downloadRepo, handleError } = require('./utils');
-const { downloadRootDir, reactComponentApi } = require('./constants');
+const { downloadRootDir, componentTemplateApi } = require('./constants');
 
 module.exports = function componentProcess() {
-  ipcMain.on('request-react-component-list', async (event, arg) => {
+  ipcMain.on('request-component-list', async (event, arg) => {
+    const { type } = arg;
     const manifestSrc = path.join(
       downloadRootDir,
-      `${reactComponentApi.downloadDir}/manifest.json`
+      `${componentTemplateApi[type].downloadDir}/manifest.json`
     );
-    if (!arg && fs.existsSync(manifestSrc)) {
+    if (fs.existsSync(manifestSrc)) {
       // eslint-disable-next-line
       const result = require(manifestSrc);
-      return event.reply('get-react-component-list', result);
+      return event.reply('get-component-list', result);
     }
-    const url = reactComponentApi.repoUrl;
+    const url = componentTemplateApi[type].repoUrl;
     let data;
     try {
       data = await fetchGit(url);
@@ -27,6 +29,32 @@ module.exports = function componentProcess() {
     const dest = await downloadRepo({ name, full_name });
     // eslint-disable-next-line
     const manifest = require(path.join(dest, 'manifest.json'));
-    return event.reply('get-react-component-list', manifest);
+    return event.reply('get-component-list', manifest);
+  });
+
+  ipcMain.on('create-component', async (event, arg) => {
+    const { name, filepath, type, directory } = arg;
+    const templateSrc = path.join(
+      downloadRootDir,
+      `${componentTemplateApi[type].downloadDir}/${filepath}`
+    );
+    await new Promise(() => {
+      let destination = path.resolve(directory, name);
+      destination = destination.replace(/\\/g, '/');
+      if (fs.existsSync(destination)) {
+        event.reply('error', '组件已存在！');
+      } else {
+        metalsmith(__dirname)
+          .source(templateSrc)
+          .destination(destination)
+          .build((err) => {
+            if (err) {
+              handleError(err);
+            } else {
+              event.reply('component-created');
+            }
+          });
+      }
+    });
   });
 };

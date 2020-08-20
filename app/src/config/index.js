@@ -26,8 +26,13 @@ const menu = [
 ];
 
 const api = {
-  baseUrl: '',
-  ReactComponentPreviewUrl: 'https://sliver-cli.github.io/react-component/#/'
+  baseUrl: ''
 };
 
-export { menu, api };
+const componentTemplateApi = {
+  react: {
+    previewUrl: 'https://sliver-cli.github.io/react-component/#/'
+  }
+};
+
+export { menu, api, componentTemplateApi };
