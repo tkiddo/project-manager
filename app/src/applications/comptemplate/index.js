@@ -3,7 +3,7 @@ import './index.scss';
 import { Container, Tabs, Tab, Button, Spinner } from 'react-bootstrap';
 import { ipcRenderer } from 'electron';
 import CustomScroll from '../../components/CustomScroll';
-import ComponentItem from './compItem';
+import ComponentItem from './CompItem';
 import FormModal from '../../components/FormModal';
 import useToast from '../../hooks/useToast';
 

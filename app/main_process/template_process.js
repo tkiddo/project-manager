@@ -9,7 +9,8 @@ const {
   handleError,
   handleExec,
   wirteJson,
-  isExisted
+  isExisted,
+  genID
 } = require('./utils');
 const { downloadRootDir, projectTemplateApi } = require('./constants');
 const projectArray = require('./data/project.json');
@@ -69,7 +70,8 @@ module.exports = function templateProcess() {
                 destination,
                 shell
               });
-              projectArray.unshift({ name, description, destination, template });
+              const id = genID();
+              projectArray.unshift({ id, name, description, destination, template });
               wirteJson(path.resolve(__dirname, './data/project.json'), projectArray, () => {
                 event.reply('project-created');
               });

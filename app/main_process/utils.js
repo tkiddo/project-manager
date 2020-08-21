@@ -64,6 +64,7 @@ const wirteJson = (file, data, callback) => {
     fs.writeFileSync(file, str);
     callback();
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error);
   }
 };
@@ -73,6 +74,8 @@ const isExisted = (destination, array) => {
   return idx !== -1;
 };
 
+const genID = () => Number(Math.random().toString().substr(3, 8) + Date.now()).toString(36);
+
 module.exports = {
   fetchGit,
   downloadRepo,
@@ -80,5 +83,6 @@ module.exports = {
   handleError,
   handleExec,
   wirteJson,
-  isExisted
+  isExisted,
+  genID
 };

@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const projectArray = require('./data/project.json');
 
-const { handleExec, wirteJson, isExisted, handleError } = require('./utils');
+const { handleExec, wirteJson, isExisted, genID } = require('./utils');
 
 module.exports = function projectProcess() {
   ipcMain.on('get-project-list', (event) => {
@@ -15,8 +15,13 @@ module.exports = function projectProcess() {
     switch (ide) {
       case 'vscode':
         // eslint-disable-next-line no-case-declarations
-        const shell = `Code ${destination}`;
-        handleExec({ destination, shell });
+        if (fs.existsSync(destination)) {
+          const shell = `Code ${destination}`;
+          handleExec({ destination, shell });
+        } else {
+          event.reply('error', '项目不存在！');
+        }
+
         break;
 
       default:
@@ -31,7 +36,9 @@ module.exports = function projectProcess() {
     } else if (fs.existsSync(path.join(directory, 'package.json'))) {
       // eslint-disable-next-line
       const pkg = require(path.join(directory, 'package.json'));
+      const id = genID();
       projectArray.unshift({
+        id,
         name: pkg.name,
         description: pkg.description,
         destination: directory,
@@ -41,12 +48,13 @@ module.exports = function projectProcess() {
         event.reply('project-imported', projectArray);
       });
     } else {
-      handleError('package.json不存在！');
+      event.reply('error', 'package.json不存在！');
     }
   });
 
   ipcMain.on('delete-project', (event, arg) => {
-    projectArray.splice(arg, 1);
+    const idx = projectArray.findIndex((item) => item.id === arg);
+    projectArray.splice(idx, 1);
     wirteJson(path.resolve(__dirname, './data/project.json'), projectArray, () => {
       event.returnValue = projectArray;
     });

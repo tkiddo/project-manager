@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ipcRenderer } from 'electron';
 import { Container, Row, Col, Button, Form, InputGroup, Badge } from 'react-bootstrap';
-import RuleItem from './ruleItem';
+import RuleItem from './RuleItem';
 import './index.scss';
 
 const rules = ipcRenderer.sendSync('get-eslint-rules');

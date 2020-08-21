@@ -3,7 +3,7 @@ import './index.scss';
 import { Container, Button } from 'react-bootstrap';
 import { ipcRenderer } from 'electron';
 import FormModal from '../../components/FormModal';
-import TaskItem from './taskItem';
+import TaskItem from './TaskItem';
 
 const TaskManage = () => {
   const [list, setList] = useState([]);

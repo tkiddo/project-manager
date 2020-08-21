@@ -1,6 +1,6 @@
-import React from 'react';
+import React from '
 import './index.scss';
-import { ButtonGroup, Dropdown, DropdownButton, Accordion, Card, Button } from 'react-bootstrap';
+import { ButtonGroup, Dropdown, DropdownButton, Accordion, Card, Button } from '';
 
 const RuleItem = (props) => {
   const { name, description, onConfig } = props;

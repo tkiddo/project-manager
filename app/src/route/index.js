@@ -1,12 +1,12 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 import React from 'react';
 
-import UserGuide from '../applications/userguide';
-import TplManage from '../applications/tplmanage';
-import ProjectManage from '../applications/projectmanage';
-import EslintManage from '../applications/eslintmanage';
-import Taskmanage from '../applications/taskmanage';
-import CompTemplate from '../applications/comptemplate';
+import UserGuide from '../applications/UserGuide';
+import TplManage from '../applications/TplManage';
+import ProjectManage from '../applications/ProjectManage';
+import EslintManage from '../applications/EslintManage';
+import Taskmanage from '../applications/Taskmanage';
+import CompTemplate from '../applications/CompTemplate';
 
 const AppRoute = () => (
   <Switch>

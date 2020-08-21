@@ -47,19 +47,16 @@ const ProjectManage = () => {
         <thead className="table-head">
           <tr>
             <th>名称</th>
-            <th>模版</th>
             <th>描述</th>
             <th>操作</th>
           </tr>
         </thead>
         <tbody className="table-body">
           {list.map((item, index) => {
-            const { name, template, description, destination } = item;
+            const { name, description, destination, id } = item;
             return (
-              // eslint-disable-next-line react/no-array-index-key
-              <tr key={index}>
+              <tr key={id}>
                 <th className="table-item project-item-name">{name}</th>
-                <th className="table-item project-item-template">{template}</th>
                 <th className="table-item project-item-description">{description}</th>
                 <th>
                   <DropdownButton as={ButtonGroup} title="编辑器打开" size="sm">
@@ -71,10 +68,18 @@ const ProjectManage = () => {
                     </Dropdown.Item>
                   </DropdownButton>
                   <Button
+                    variant="info"
+                    size="sm"
+                    className="project-item-btn"
+                    onClick={() => handleDelete(index)}
+                  >
+                    详情
+                  </Button>
+                  <Button
                     variant="danger"
                     size="sm"
-                    className="project-del"
-                    onClick={() => handleDelete(index)}
+                    className="project-item-btn"
+                    onClick={() => handleDelete(id)}
                   >
                     删除
                   </Button>

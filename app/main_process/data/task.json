@@ -1,15 +1,27 @@
 [
 	{
+		"createTime": "2020/8/21 上午9:08:56",
+		"content": "项目详情，打开文件夹，命令行运行，依赖详情",
+		"priority": "2",
+		"done": false
+	},
+	{
+		"createTime": "2020/8/20 下午4:49:52",
+		"content": "小报系统 chrome插件",
+		"priority": "1",
+		"done": false
+	},
+	{
 		"createTime": "2020/8/20 上午11:14:27",
 		"content": "loading 动画",
 		"priority": "1",
-		"done": false
+		"done": true
 	},
 	{
 		"createTime": "2020/8/20 上午10:09:20",
 		"content": "react hooks优化",
 		"priority": "1",
-		"done": false
+		"done": true
 	},
 	{
 		"createTime": "2020/8/19 下午4:52:41",
@@ -34,12 +46,6 @@
 		"content": "头部菜单统一",
 		"priority": "1",
 		"done": true
-	},
-	{
-		"createTime": "2020/8/19 上午9:00:26",
-		"content": "主题切换",
-		"priority": "1",
-		"done": false
 	},
 	{
 		"createTime": "2020/8/18 下午4:21:17",
