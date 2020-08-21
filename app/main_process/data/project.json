@@ -1,9 +1,16 @@
 [
 	{
-		"id": "1k9b4d8fbxeo00",
-		"name": "1414",
-		"description": "444",
-		"destination": "I:/cli-test/1414",
-		"template": "none"
+		"id": "3nxsqrbaz8k000",
+		"name": "react-demo",
+		"description": "react demo",
+		"destination": "I:/cli-test/react-demo",
+		"template": "react-project"
+	},
+	{
+		"id": "4o22jsuowlk000",
+		"name": "test",
+		"description": "test demo",
+		"destination": "I:/cli-test/test",
+		"template": "normal-project"
 	}
 ]

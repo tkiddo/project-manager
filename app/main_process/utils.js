@@ -47,15 +47,35 @@ const renderTemplate = (files, data) => {
   });
 };
 
+let workerProcess;
+
 const handleExec = ({ destination, shell }, callback) => {
-  exec(`cd /d ${destination} && ${shell}`, (error) => {
-    if (error) {
-      handleError(error);
-      process.exit(0);
-    }
+  workerProcess = exec(shell, {
+    cwd: destination
+  });
+
+  // 打印正常的后台可执行程序输出
+  workerProcess.stdout.on('data', (data) => {
+    console.log(`stdout:${data}`);
     // eslint-disable-next-line no-unused-expressions
     typeof callback === 'function' && callback();
   });
+  // 打印错误的后台可执行程序输出
+  workerProcess.stderr.on('data', (data) => {
+    console.log(`stderr: ${data}`);
+  });
+  // 退出之后的输出
+  workerProcess.on('close', (code) => {
+    console.log(`out code：${code}`);
+  });
+  // exec(`cd /d ${destination} && ${shell}`, (error) => {
+  //   if (error) {
+  //     handleError(error);
+  //     process.exit(0);
+  //   }
+  //   // eslint-disable-next-line no-unused-expressions
+  //   typeof callback === 'function' && callback();
+  // });
 };
 
 const wirteJson = (file, data, callback) => {
