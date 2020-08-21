@@ -59,4 +59,12 @@ module.exports = function projectProcess() {
       event.returnValue = projectArray;
     });
   });
+
+  ipcMain.on('request-project-info', (event, arg) => {
+    const idx = projectArray.findIndex((item) => item.id === arg);
+    const { destination } = projectArray[idx];
+    // eslint-disable-next-line
+    const pkg = require(path.join(destination, 'package.json'));
+    event.reply('get-project-info', { ...pkg, destination });
+  });
 };

@@ -52,7 +52,7 @@ const ProjectManage = () => {
           </tr>
         </thead>
         <tbody className="table-body">
-          {list.map((item, index) => {
+          {list.map((item) => {
             const { name, description, destination, id } = item;
             return (
               <tr key={id}>
@@ -71,7 +71,7 @@ const ProjectManage = () => {
                     variant="info"
                     size="sm"
                     className="project-item-btn"
-                    onClick={() => handleDelete(index)}
+                    onClick={() => history.push(`/projectinfo/${id}`)}
                   >
                     详情
                   </Button>

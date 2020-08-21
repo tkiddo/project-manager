@@ -5,8 +5,9 @@ import UserGuide from '../applications/UserGuide';
 import TplManage from '../applications/TplManage';
 import ProjectManage from '../applications/ProjectManage';
 import EslintManage from '../applications/EslintManage';
-import Taskmanage from '../applications/Taskmanage';
+import Taskmanage from '../applications/TaskManage';
 import CompTemplate from '../applications/CompTemplate';
+import ProjectInfo from '../applications/ProjectInfo';
 
 const AppRoute = () => (
   <Switch>
@@ -16,9 +17,11 @@ const AppRoute = () => (
     <Route path="/eslintmanage" component={EslintManage} />
     <Route path="/taskmanage" component={Taskmanage} />
     <Route path="/comptemplate" component={CompTemplate} />
+    <Route path="/projectinfo/:id" component={ProjectInfo} />
     <Route path="/" exact>
       <Redirect to="/userguide" />
     </Route>
+    <Route path="*">Not Found</Route>
   </Switch>
 );
 

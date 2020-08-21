@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.scss';
-import { menu } from '../../config';
+import { routerMap } from '../../config';
 import usePathname from '../../hooks/pathname';
 import useDirectory from '../../hooks/useDirectory';
 
@@ -8,7 +8,7 @@ const getTitle = (pathname) => {
   if (pathname === '/') {
     return '欢迎使用';
   }
-  const res = menu.find((item) => item.path.indexOf(pathname) !== -1);
+  const res = routerMap.find((item) => pathname.indexOf(item.path) !== -1);
   return res ? res.name : 'Sliver GUI';
 };
 

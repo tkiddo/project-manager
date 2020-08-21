@@ -3,7 +3,7 @@ import './index.scss';
 import { Card, Button } from 'react-bootstrap';
 import { componentTemplateApi } from '../../../config';
 
-const ComponentItem = (props) => {
+const CompItem = (props) => {
   const { name, description, title, type, onCreate } = props;
   const { previewUrl } = componentTemplateApi[type];
 
@@ -27,4 +27,4 @@ const ComponentItem = (props) => {
   );
 };
 
-export default ComponentItem;
+export default CompItem;
