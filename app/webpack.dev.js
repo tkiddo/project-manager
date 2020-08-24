@@ -18,7 +18,7 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'dist'),
     // gzip压缩
     compress: true,
-    port: 3000,
+    port: 3001,
     open: true,
     // 启用hmr
     hot: true,

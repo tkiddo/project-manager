@@ -1,7 +1,8 @@
 const axios = require('axios');
 const { promisify } = require('util');
 const downloadGitRepo = promisify(require('download-git-repo'));
-const { exec } = require('child_process');
+const { exec, spawn } = require('child_process');
+const iconv = require('iconv-lite');
 const { dialog } = require('electron');
 let { render } = require('consolidate').ejs;
 const fs = require('fs');
@@ -51,22 +52,24 @@ let workerProcess;
 
 const handleExec = ({ destination, shell }, callback) => {
   workerProcess = exec(shell, {
-    cwd: destination
+    cwd: destination,
+    windowsHide: false,
+    encoding: 'buffer'
   });
 
   // 打印正常的后台可执行程序输出
   workerProcess.stdout.on('data', (data) => {
-    console.log(`stdout:${data}`);
+    console.log(`stdout:${iconv.decode(data, 'gbk')}`);
     // eslint-disable-next-line no-unused-expressions
     typeof callback === 'function' && callback();
   });
   // 打印错误的后台可执行程序输出
   workerProcess.stderr.on('data', (data) => {
-    console.log(`stderr: ${data}`);
+    console.log(`stderr: ${iconv.decode(data, 'gbk')}`);
   });
   // 退出之后的输出
   workerProcess.on('close', (code) => {
-    console.log(`out code：${code}`);
+    console.log(`out code：${iconv.decode(code, 'gbk')}`);
   });
   // exec(`cd /d ${destination} && ${shell}`, (error) => {
   //   if (error) {

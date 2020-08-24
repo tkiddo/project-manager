@@ -24,7 +24,7 @@ function createWindow() {
   // mainWindow.loadFile('./dist/index.html');
 
   // 加载应用----适用于开发模式
-  mainWindow.loadURL('http://localhost:3000/');
+  mainWindow.loadURL('http://localhost:3001/');
 
   // 打开开发者工具，默认不打开
   mainWindow.webContents.openDevTools();
