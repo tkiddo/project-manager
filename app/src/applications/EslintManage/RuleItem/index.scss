@@ -1,0 +1,13 @@
+@import '../../../assets/style/color.scss';
+
+.rule-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid $light-main;
+  .config-value {
+    color: $highlight;
+    text-align: center;
+  }
+}

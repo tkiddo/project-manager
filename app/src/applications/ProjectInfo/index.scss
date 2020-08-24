@@ -1,0 +1,36 @@
+@import '../../assets/style/color.scss';
+
+.project-info-item {
+  margin-bottom: 10px;
+  .project-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .dep-key {
+    color: $primary;
+  }
+  .dep-value {
+    color: $third;
+  }
+}
+
+.project-script-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .script-key {
+    color: $primary;
+  }
+  .script-value {
+    color: $third;
+  }
+}
+
+.project-info-basic {
+  display: flex;
+  flex-wrap: wrap;
+  .project-basic-item {
+    width: 50%;
+  }
+}

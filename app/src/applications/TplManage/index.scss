@@ -1,0 +1,13 @@
+@import '../../assets/style/color.scss';
+
+.tpl-item-name {
+  color: $light-main;
+}
+.tpl-item-meta {
+  color: $highlight;
+}
+
+.tpl-fresh {
+  margin: 10px 20px;
+  padding: 5px 30px;
+}
