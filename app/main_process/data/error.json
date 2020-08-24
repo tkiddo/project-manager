@@ -1,5 +1,21 @@
 [
 	{
+		"name": "ReferenceError",
+		"message": "modalShow is not defined",
+		"errorInfo": {
+			"componentStack": "\n    in ProjectInfo\n    in Route\n    in Switch\n    in AppRoute\n    in div\n    in div\n    in Col\n    in div\n    in Row\n    in div\n    in Container\n    in App\n    in Router\n    in HashRouter\n    in ErrorBoundary\n    in Provider"
+		},
+		"time": "15:17:30 GMT+0800 (中国标准时间)"
+	},
+	{
+		"name": "ReferenceError",
+		"message": "terminalText is not defined",
+		"errorInfo": {
+			"componentStack": "\n    in ProjectInfo\n    in Route\n    in Switch\n    in AppRoute\n    in div\n    in div\n    in Col\n    in div\n    in Row\n    in div\n    in Container\n    in App\n    in Router\n    in HashRouter\n    in ErrorBoundary\n    in Provider"
+		},
+		"time": "14:13:43 GMT+0800 (中国标准时间)"
+	},
+	{
 		"name": "Error",
 		"message": "hello",
 		"errorInfo": {

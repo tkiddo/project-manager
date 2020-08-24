@@ -63,8 +63,27 @@ module.exports = function projectProcess() {
   ipcMain.on('request-project-info', (event, arg) => {
     const idx = projectArray.findIndex((item) => item.id === arg);
     const { destination } = projectArray[idx];
-    // eslint-disable-next-line
-    const pkg = require(path.join(destination, 'package.json'));
+    const pkg = JSON.parse(fs.readFileSync(path.join(destination, 'package.json')));
     event.reply('get-project-info', { ...pkg, destination });
+  });
+
+  ipcMain.on('add-dependency', (event, arg) => {
+    const { dep, destination } = arg;
+    const shell =
+      dep.type === 'dependencies' ? `yarn add ${dep.name} --save` : `yarn add ${dep.name} --dev`;
+    handleExec({ shell, destination, detached: true }, () => {
+      const pkg = JSON.parse(fs.readFileSync(path.join(destination, 'package.json')));
+      event.reply('get-project-info', { ...pkg, destination });
+    });
+  });
+
+  ipcMain.on('add-script', (event, arg) => {
+    const { form, destination } = arg;
+    const pkg = JSON.parse(fs.readFileSync(path.join(destination, 'package.json')));
+    pkg.scripts[form.name] = form.script;
+    wirteJson(path.join(destination, 'package.json'), pkg, () => {
+      const json = JSON.parse(fs.readFileSync(path.join(destination, 'package.json')));
+      event.reply('get-project-info', { ...json, destination });
+    });
   });
 };

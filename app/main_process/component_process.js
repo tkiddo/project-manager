@@ -13,8 +13,7 @@ module.exports = function componentProcess() {
       `${componentTemplateApi[type].downloadDir}/manifest.json`
     );
     if (!forced && fs.existsSync(manifestSrc)) {
-      // eslint-disable-next-line
-      const result = require(manifestSrc);
+      const result = JSON.parse(fs.readFileSync(manifestSrc));
       return event.reply('get-component-list', result);
     }
     const url = componentTemplateApi[type].repoUrl;
@@ -27,8 +26,7 @@ module.exports = function componentProcess() {
     // eslint-disable-next-line camelcase
     const { name, full_name } = data;
     const dest = await downloadRepo({ name, full_name });
-    // eslint-disable-next-line
-    const manifest = require(path.join(dest, 'manifest.json'));
+    const manifest = JSON.parse(fs.readFileSync(path.join(dest, 'manifest.json')));
     return event.reply('get-component-list', manifest);
   });
 

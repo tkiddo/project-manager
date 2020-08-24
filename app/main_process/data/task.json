@@ -1,15 +1,21 @@
 [
 	{
+		"createTime": "2020/8/24 下午2:47:44",
+		"content": "添加依赖和命令",
+		"priority": "1",
+		"done": true
+	},
+	{
 		"createTime": "2020/8/24 上午9:35:15",
 		"content": "重复require没有更新",
 		"priority": "1",
-		"done": false
+		"done": true
 	},
 	{
 		"createTime": "2020/8/21 下午3:36:57",
 		"content": "命令行面板",
 		"priority": "1",
-		"done": false
+		"done": true
 	},
 	{
 		"createTime": "2020/8/21 下午3:20:33",

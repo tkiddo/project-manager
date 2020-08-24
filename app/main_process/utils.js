@@ -1,8 +1,8 @@
+/* eslint-disable no-unused-expressions */
 const axios = require('axios');
 const { promisify } = require('util');
 const downloadGitRepo = promisify(require('download-git-repo'));
-const { exec, spawn } = require('child_process');
-const iconv = require('iconv-lite');
+const { spawn } = require('child_process');
 const { dialog } = require('electron');
 let { render } = require('consolidate').ejs;
 const fs = require('fs');
@@ -50,35 +50,33 @@ const renderTemplate = (files, data) => {
 
 let workerProcess;
 
-const handleExec = ({ destination, shell }, callback) => {
-  workerProcess = exec(shell, {
+const handleExec = ({ destination, shell, detached }, callback) => {
+  workerProcess = spawn(`chcp 65001 && ${shell}`, {
     cwd: destination,
     windowsHide: false,
-    encoding: 'buffer'
+    shell: true,
+    detached: detached || false
   });
 
   // 打印正常的后台可执行程序输出
   workerProcess.stdout.on('data', (data) => {
-    console.log(`stdout:${iconv.decode(data, 'gbk')}`);
-    // eslint-disable-next-line no-unused-expressions
-    typeof callback === 'function' && callback();
+    console.log(`stdout:${data}`);
   });
   // 打印错误的后台可执行程序输出
   workerProcess.stderr.on('data', (data) => {
-    console.log(`stderr: ${iconv.decode(data, 'gbk')}`);
+    console.log(`stderr: ${data}`);
   });
-  // 退出之后的输出
+  // // 退出之后的输出
   workerProcess.on('close', (code) => {
-    console.log(`out code：${iconv.decode(code, 'gbk')}`);
+    console.log(`out code：${code}`);
   });
-  // exec(`cd /d ${destination} && ${shell}`, (error) => {
-  //   if (error) {
-  //     handleError(error);
-  //     process.exit(0);
-  //   }
-  //   // eslint-disable-next-line no-unused-expressions
-  //   typeof callback === 'function' && callback();
-  // });
+
+  workerProcess.on('exit', (code) => {
+    console.log(`exit:${code}`);
+    if (typeof callback === 'function') {
+      callback();
+    }
+  });
 };
 
 const wirteJson = (file, data, callback) => {
