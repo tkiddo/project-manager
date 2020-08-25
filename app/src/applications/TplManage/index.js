@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import './index.scss';
 
 import { ipcRenderer } from 'electron';
@@ -64,24 +64,29 @@ const TplManage = () => {
           </tr>
         </thead>
         <tbody className="table-body">
-          {listState.list.map((item, index) => {
-            const { name, frame, meta } = item;
-            return (
-              // eslint-disable-next-line react/no-array-index-key
-              <tr key={index}>
-                <th className="tpl-item-name table-item">{name}</th>
-                <th>
-                  <Badge variant={getBadge(frame)}>{frame}</Badge>
-                </th>
-                <th className="tpl-item-meta table-item">{meta}</th>
-                <th>
-                  <Button variant="success" size="sm" onClick={() => handleSelect(name)}>
-                    创建项目
-                  </Button>
-                </th>
-              </tr>
-            );
-          })}
+          {useMemo(
+            () =>
+              // eslint-disable-next-line implicit-arrow-linebreak
+              listState.list.map((item, index) => {
+                const { name, frame, meta } = item;
+                return (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <tr key={index}>
+                    <th className="tpl-item-name table-item">{name}</th>
+                    <th>
+                      <Badge variant={getBadge(frame)}>{frame}</Badge>
+                    </th>
+                    <th className="tpl-item-meta table-item">{meta}</th>
+                    <th>
+                      <Button variant="success" size="sm" onClick={() => handleSelect(name)}>
+                        创建项目
+                      </Button>
+                    </th>
+                  </tr>
+                );
+              }),
+            [listState.list]
+          )}
         </tbody>
       </Table>
       <FormModal

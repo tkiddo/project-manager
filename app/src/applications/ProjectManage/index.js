@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Button, Table, DropdownButton, Dropdown, ButtonGroup, Container } from 'react-bootstrap';
 import { ipcRenderer } from 'electron';
 import { useHistory } from 'react-router-dom';
@@ -52,41 +52,46 @@ const ProjectManage = () => {
           </tr>
         </thead>
         <tbody className="table-body">
-          {list.map((item) => {
-            const { name, description, destination, id } = item;
-            return (
-              <tr key={id}>
-                <th className="table-item project-item-name">{name}</th>
-                <th className="table-item project-item-description">{description}</th>
-                <th>
-                  <DropdownButton as={ButtonGroup} title="编辑器打开" size="sm">
-                    <Dropdown.Item
-                      eventKey="1"
-                      onClick={() => handleOpen({ ide: 'vscode', destination, name })}
-                    >
-                      VS Code
-                    </Dropdown.Item>
-                  </DropdownButton>
-                  <Button
-                    variant="info"
-                    size="sm"
-                    className="project-item-btn"
-                    onClick={() => history.push(`/projectinfo/${id}`)}
-                  >
-                    详情
-                  </Button>
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    className="project-item-btn"
-                    onClick={() => handleDelete(id)}
-                  >
-                    删除
-                  </Button>
-                </th>
-              </tr>
-            );
-          })}
+          {useMemo(
+            () =>
+              // eslint-disable-next-line implicit-arrow-linebreak
+              list.map((item) => {
+                const { name, description, destination, id } = item;
+                return (
+                  <tr key={id}>
+                    <th className="table-item project-item-name">{name}</th>
+                    <th className="table-item project-item-description">{description}</th>
+                    <th>
+                      <DropdownButton as={ButtonGroup} title="编辑器打开" size="sm">
+                        <Dropdown.Item
+                          eventKey="1"
+                          onClick={() => handleOpen({ ide: 'vscode', destination, name })}
+                        >
+                          VS Code
+                        </Dropdown.Item>
+                      </DropdownButton>
+                      <Button
+                        variant="info"
+                        size="sm"
+                        className="project-item-btn"
+                        onClick={() => history.push(`/projectinfo/${id}`)}
+                      >
+                        详情
+                      </Button>
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        className="project-item-btn"
+                        onClick={() => handleDelete(id)}
+                      >
+                        删除
+                      </Button>
+                    </th>
+                  </tr>
+                );
+              }),
+            [list]
+          )}
         </tbody>
       </Table>
       <FormModal

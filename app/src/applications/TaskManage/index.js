@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './index.scss';
 import { Container, Button, CardColumns } from 'react-bootstrap';
 import { ipcRenderer } from 'electron';
@@ -51,19 +51,24 @@ const TaskManage = () => {
 
       <CustomScroll height="600px">
         <CardColumns>
-          {list.map(
-            (item) =>
+          {useMemo(
+            () =>
               // eslint-disable-next-line implicit-arrow-linebreak
-              !item.done && (
-                <TaskItem
-                  createTime={item.createTime}
-                  content={item.content}
-                  priority={item.priority}
-                  done={item.done}
-                  onFinish={() => handleFinish(item)}
-                  onDelete={() => handleDelete(item)}
-                />
-              )
+              list.map(
+                (item) =>
+                  // eslint-disable-next-line implicit-arrow-linebreak
+                  !item.done && (
+                    <TaskItem
+                      createTime={item.createTime}
+                      content={item.content}
+                      priority={item.priority}
+                      done={item.done}
+                      onFinish={() => handleFinish(item)}
+                      onDelete={() => handleDelete(item)}
+                    />
+                  )
+              ),
+            [list]
           )}
         </CardColumns>
       </CustomScroll>

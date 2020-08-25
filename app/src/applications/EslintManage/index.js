@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { ipcRenderer } from 'electron';
 import { Container, Row, Col, Button, Form, InputGroup, Badge } from 'react-bootstrap';
 import RuleItem from './RuleItem';
@@ -79,12 +79,22 @@ const EslintManage = () => {
       </Form>
       <Row>
         <Col md={5} className="rule-list">
-          {list.map((item) => {
-            const { name, description } = item;
-            return (
-              <RuleItem name={name} key={name} onConfig={handleConfig} description={description} />
-            );
-          })}
+          {useMemo(
+            () =>
+              // eslint-disable-next-line implicit-arrow-linebreak
+              list.map((item) => {
+                const { name, description } = item;
+                return (
+                  <RuleItem
+                    name={name}
+                    key={name}
+                    onConfig={handleConfig}
+                    description={description}
+                  />
+                );
+              }),
+            [list]
+          )}
         </Col>
         <Col md={7}>
           <h5>

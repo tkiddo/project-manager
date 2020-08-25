@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './index.scss';
 import { Container, Button, CardColumns, Form, Col, InputGroup } from 'react-bootstrap';
 import { ipcRenderer } from 'electron';
@@ -92,17 +92,22 @@ const Collection = () => {
 
       <CustomScroll height="600px">
         <CardColumns>
-          {list.filtered.map(
-            (item) =>
+          {useMemo(
+            () =>
               // eslint-disable-next-line implicit-arrow-linebreak
-              !item.done && (
-                <CollectionItem
-                  description={item.description}
-                  link={item.link}
-                  title={item.title}
-                  onDelete={() => handleDelete(item)}
-                />
-              )
+              list.filtered.map(
+                (item) =>
+                  // eslint-disable-next-line implicit-arrow-linebreak
+                  !item.done && (
+                    <CollectionItem
+                      description={item.description}
+                      link={item.link}
+                      title={item.title}
+                      onDelete={() => handleDelete(item)}
+                    />
+                  )
+              ),
+            [list.filtered]
           )}
         </CardColumns>
       </CustomScroll>

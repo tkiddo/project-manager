@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './index.scss';
 import { Container, Tabs, Tab, Button, Spinner } from 'react-bootstrap';
 import { ipcRenderer } from 'electron';
@@ -47,21 +47,26 @@ const CompTemplate = () => {
         <Tab eventKey="react" title="React组件">
           <CustomScroll height="600px">
             <div className="comp-list">
-              {listState.list.map((item) => {
-                const { name, description, title, filepath } = item;
-                return (
-                  <ComponentItem
-                    name={name}
-                    description={description}
-                    title={title}
-                    filepath={filepath}
-                    type="react"
-                    onCreate={() => {
-                      handleSelect({ ...item, type: 'react' });
-                    }}
-                  />
-                );
-              })}
+              {useMemo(
+                () =>
+                  // eslint-disable-next-line implicit-arrow-linebreak
+                  listState.list.map((item) => {
+                    const { name, description, title, filepath } = item;
+                    return (
+                      <ComponentItem
+                        name={name}
+                        description={description}
+                        title={title}
+                        filepath={filepath}
+                        type="react"
+                        onCreate={() => {
+                          handleSelect({ ...item, type: 'react' });
+                        }}
+                      />
+                    );
+                  }),
+                [listState.list]
+              )}
             </div>
           </CustomScroll>
         </Tab>
