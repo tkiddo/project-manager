@@ -1,12 +1,5 @@
 [
 	{
-		"id": "4p7qysh6bqm000",
-		"name": "normal",
-		"description": "阿斯顿发发送到",
-		"destination": "I:/cli-test/normal",
-		"template": "normal-project"
-	},
-	{
 		"id": "1g1svhjr2hnk00",
 		"name": "blank",
 		"description": "不不不不不",

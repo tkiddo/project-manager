@@ -6,6 +6,7 @@ import CustomScroll from '../../components/CustomScroll';
 import ComponentItem from './CompItem';
 import FormModal from '../../components/FormModal';
 import useToast from '../../hooks/useToast';
+import CustomList from '../../components/CustomList';
 
 const CompTemplate = () => {
   const [type, setType] = useState('react');
