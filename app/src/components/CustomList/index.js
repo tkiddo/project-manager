@@ -8,6 +8,7 @@ const CustomList = (props) => {
     <>
       {data.length === 0 && <div>无数据</div>}
       {data.map((item) => (
+        // eslint-disable-next-line react/jsx-props-no-spreading
         <Template {...item} {...more} />
       ))}
     </>
