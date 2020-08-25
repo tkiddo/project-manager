@@ -19,7 +19,7 @@ const CompItem = (props) => {
         <Button size="sm" variant="success" onClick={onCreate}>
           应用
         </Button>
-        <Button size="sm" variant="danger" className="margin-left-10" onClick={handlePreview}>
+        <Button size="sm" variant="info" className="margin-left-10" onClick={handlePreview}>
           预览
         </Button>
       </div>

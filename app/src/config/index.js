@@ -24,8 +24,8 @@ const menu = [
     path: '/taskmanage'
   },
   {
-    name: '博文收藏',
-    path: '/blogs'
+    name: '我的收藏',
+    path: '/collection'
   }
 ];
 

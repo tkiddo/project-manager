@@ -6,6 +6,7 @@ const eslint = require('./eslint_process');
 const task = require('./task_process');
 const component = require('./component_process');
 const common = require('./common_process');
+const collection = require('./collection_process');
 
 module.exports = function mainProcess() {
   localDir();
@@ -15,4 +16,5 @@ module.exports = function mainProcess() {
   task();
   component();
   common();
+  collection();
 };

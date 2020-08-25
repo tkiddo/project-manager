@@ -8,6 +8,8 @@ import EslintManage from '../applications/EslintManage';
 import Taskmanage from '../applications/TaskManage';
 import CompTemplate from '../applications/CompTemplate';
 import ProjectInfo from '../applications/ProjectInfo';
+import Collection from '../applications/Collection';
+
 import NotFound from '../components/NotFound';
 
 const AppRoute = () => (
@@ -19,6 +21,7 @@ const AppRoute = () => (
     <Route path="/taskmanage" component={Taskmanage} />
     <Route path="/comptemplate" component={CompTemplate} />
     <Route path="/projectinfo/:id" component={ProjectInfo} />
+    <Route path="/collection" component={Collection} />
     <Route path="/" exact>
       <Redirect to="/userguide" />
     </Route>

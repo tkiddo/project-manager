@@ -22,7 +22,7 @@ const TaskItem = (props) => {
                 完成
               </Button>
             )}
-            <Button size="sm" variant="warning" onClick={onDelete}>
+            <Button size="sm" variant="secondary" onClick={onDelete}>
               废弃
             </Button>
           </div>

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './index.scss';
-import { Container, Button } from 'react-bootstrap';
+import { Container, Button, CardColumns } from 'react-bootstrap';
 import { ipcRenderer } from 'electron';
 import FormModal from '../../components/FormModal';
 import TaskItem from './TaskItem';
+import CustomScroll from '../../components/CustomScroll';
 
 const TaskManage = () => {
   const [list, setList] = useState([]);
@@ -48,8 +49,8 @@ const TaskManage = () => {
         </Button>
       </Container>
 
-      <div className="scroll-wrapper">
-        <div className="list-container">
+      <CustomScroll height="600px">
+        <CardColumns>
           {list.map(
             (item) =>
               // eslint-disable-next-line implicit-arrow-linebreak
@@ -64,8 +65,8 @@ const TaskManage = () => {
                 />
               )
           )}
-        </div>
-      </div>
+        </CardColumns>
+      </CustomScroll>
 
       <FormModal
         show={modalShow}
