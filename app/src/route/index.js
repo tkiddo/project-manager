@@ -8,6 +8,7 @@ import EslintManage from '../applications/EslintManage';
 import Taskmanage from '../applications/TaskManage';
 import CompTemplate from '../applications/CompTemplate';
 import ProjectInfo from '../applications/ProjectInfo';
+import NotFound from '../components/NotFound';
 
 const AppRoute = () => (
   <Switch>
@@ -21,7 +22,9 @@ const AppRoute = () => (
     <Route path="/" exact>
       <Redirect to="/userguide" />
     </Route>
-    <Route path="*">Not Found</Route>
+    <Route path="*">
+      <NotFound />
+    </Route>
   </Switch>
 );
 

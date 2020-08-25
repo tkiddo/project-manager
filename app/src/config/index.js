@@ -22,34 +22,15 @@ const menu = [
   {
     name: '任务管理',
     path: '/taskmanage'
+  },
+  {
+    name: '博文收藏',
+    path: '/blogs'
   }
 ];
 
 const routerMap = [
-  {
-    name: '用户指南',
-    path: '/userguide'
-  },
-  {
-    name: '项目管理',
-    path: '/projectmanage'
-  },
-  {
-    name: '项目模版',
-    path: '/tplmanage'
-  },
-  {
-    name: '组件模版',
-    path: '/comptemplate'
-  },
-  {
-    name: 'Eslint规则',
-    path: '/eslintmanage'
-  },
-  {
-    name: '任务管理',
-    path: '/taskmanage'
-  },
+  ...menu,
   {
     name: '项目详情',
     path: '/projectinfo'
