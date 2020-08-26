@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.scss';
 import { Modal, Button, Form, Row, Col, InputGroup } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import useDirectory from '../../hooks/useDirectory';
 
 const FormModal = (props) => {
@@ -100,3 +101,16 @@ const FormModal = (props) => {
 };
 
 export default React.memo(FormModal);
+
+FormModal.propTypes = {
+  show: PropTypes.bool,
+  onHide: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  confirmText: PropTypes.func.isRequired
+};
+
+FormModal.defaultProps = {
+  show: false
+};

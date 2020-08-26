@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.scss';
 import { Card, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import { componentTemplateApi } from '../../../config';
 
 const CompItem = (props) => {
@@ -28,3 +29,11 @@ const CompItem = (props) => {
 };
 
 export default CompItem;
+
+CompItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  onCreate: PropTypes.func.isRequired
+};

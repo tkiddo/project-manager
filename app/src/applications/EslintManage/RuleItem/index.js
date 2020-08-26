@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.scss';
 import { ButtonGroup, Dropdown, DropdownButton, Accordion, Card, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 const RuleItem = (props) => {
   const { name, description, onConfig } = props;
@@ -35,3 +36,13 @@ const RuleItem = (props) => {
 };
 
 export default RuleItem;
+
+RuleItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  onConfig: PropTypes.func.isRequired
+};
+
+RuleItem.defaultProps = {
+  description: ''
+};

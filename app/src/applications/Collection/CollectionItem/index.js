@@ -2,6 +2,7 @@ import React from 'react';
 import './index.scss';
 import { Container, Card, Button } from 'react-bootstrap';
 import { shell } from 'electron';
+import PropTypes from 'prop-types';
 
 const CollectionItem = (props) => {
   const { title, description, link, onDelete } = props;
@@ -29,3 +30,10 @@ const CollectionItem = (props) => {
 };
 
 export default CollectionItem;
+
+CollectionItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired
+};

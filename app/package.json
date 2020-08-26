@@ -60,7 +60,6 @@
           ]
         }
       ],
-      "react/prop-types": 0,
       "operator-linebreak": [
         "error",
         "after"

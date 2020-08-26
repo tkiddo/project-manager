@@ -1,6 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { ipcRenderer } from 'electron';
+import PropTypes from 'prop-types';
 
 export default class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -41,3 +42,11 @@ export default class ErrorBoundary extends React.Component {
     return this.props.children;
   }
 }
+
+ErrorBoundary.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
+};
+
+ErrorBoundary.defaultProps = {
+  children: null
+};

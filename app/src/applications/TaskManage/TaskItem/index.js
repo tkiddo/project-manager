@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.scss';
 import { Container, Card, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 const priorityMap = {
   3: { text: 'white', bg: 'primary' },
@@ -34,3 +35,16 @@ const TaskItem = (props) => {
 };
 
 export default TaskItem;
+
+TaskItem.propTypes = {
+  createTime: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  priority: PropTypes.number.isRequired,
+  done: PropTypes.bool,
+  onFinish: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired
+};
+
+TaskItem.defaultProps = {
+  done: false
+};
