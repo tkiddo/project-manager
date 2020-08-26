@@ -3,7 +3,16 @@ const fs = require('fs');
 const path = require('path');
 const projectArray = require('./data/project.json');
 
-const { handleExec, wirteJson, isExisted, genID } = require('./utils');
+const { handleExec, wirteJson, isExisted, genID, readPackageInfo } = require('./utils');
+
+const getProjectInfo = (destination, event) => {
+  const pkg = readPackageInfo(destination);
+  if (pkg) {
+    event.reply('get-project-info', { ...pkg, destination });
+  } else {
+    event.reply('error', 'package.json不存在！');
+  }
+};
 
 module.exports = function projectProcess() {
   ipcMain.on('get-project-list', (event) => {
@@ -63,8 +72,7 @@ module.exports = function projectProcess() {
   ipcMain.on('request-project-info', (event, arg) => {
     const idx = projectArray.findIndex((item) => item.id === arg);
     const { destination } = projectArray[idx];
-    const pkg = JSON.parse(fs.readFileSync(path.join(destination, 'package.json')));
-    event.reply('get-project-info', { ...pkg, destination });
+    getProjectInfo(destination, event);
   });
 
   ipcMain.on('add-dependency', (event, arg) => {
@@ -72,8 +80,7 @@ module.exports = function projectProcess() {
     const shell =
       dep.type === 'dependencies' ? `yarn add ${dep.name} --save` : `yarn add ${dep.name} --dev`;
     handleExec({ shell, destination, detached: true }, () => {
-      const pkg = JSON.parse(fs.readFileSync(path.join(destination, 'package.json')));
-      event.reply('get-project-info', { ...pkg, destination });
+      getProjectInfo(destination, event);
     });
   });
 
@@ -82,8 +89,7 @@ module.exports = function projectProcess() {
     const pkg = JSON.parse(fs.readFileSync(path.join(destination, 'package.json')));
     pkg.scripts[form.name] = form.script;
     wirteJson(path.join(destination, 'package.json'), pkg, () => {
-      const json = JSON.parse(fs.readFileSync(path.join(destination, 'package.json')));
-      event.reply('get-project-info', { ...json, destination });
+      getProjectInfo(destination, event);
     });
   });
 };

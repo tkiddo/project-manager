@@ -6,6 +6,7 @@ const { spawn } = require('child_process');
 const { dialog } = require('electron');
 let { render } = require('consolidate').ejs;
 const fs = require('fs');
+const path = require('path');
 
 render = promisify(render);
 
@@ -97,6 +98,14 @@ const isExisted = (destination, array) => {
 
 const genID = () => Number(Math.random().toString().substr(3, 8) + Date.now()).toString(36);
 
+const readPackageInfo = (destination) => {
+  const jsonSrc = path.join(destination, 'package.json');
+  if (fs.existsSync(jsonSrc)) {
+    return JSON.parse(fs.readFileSync(jsonSrc));
+  }
+  return null;
+};
+
 module.exports = {
   fetchGit,
   downloadRepo,
@@ -105,5 +114,6 @@ module.exports = {
   handleExec,
   wirteJson,
   isExisted,
-  genID
+  genID,
+  readPackageInfo
 };
