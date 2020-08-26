@@ -71,6 +71,7 @@ const FormModal = (props) => {
       centered
       className="form-modal"
       dialogClassName="modal-60w"
+      onHide={onHide}
     >
       <Form onSubmit={handleSubmit}>
         <Modal.Header>
