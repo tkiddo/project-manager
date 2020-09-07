@@ -11,7 +11,7 @@
     "start-renderer": "webpack-dev-server --config webpack.dev.js",
     "build-react": "webpack --progress --config webpack.react.js",
     "electron": "electron .",
-    "dist": "electron-builder",
+    "bundle": "electron-builder",
     "postinstall": "electron-builder install-app-deps"
   },
   "build": {
@@ -23,7 +23,8 @@
       "./main.js",
       "./main_process/**/*",
       "./node_modules/**/*",
-      "./preload.js"
+      "./preload.js",
+      "./public/**/*"
     ],
     "mac": {
       "category": "sliver.gui.category"
