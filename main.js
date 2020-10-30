@@ -47,10 +47,10 @@ function createWindow() {
   setTray(mainWindow);
 
   // 加载应用-----适用于生产模式
-  mainWindow.loadFile('./dist/index.html');
+  // mainWindow.loadFile('./dist/index.html');
 
   // 加载应用----适用于开发模式
-  // mainWindow.loadURL('http://localhost:3001/');
+  mainWindow.loadURL('http://localhost:3001/');
 
   // 打开开发者工具，默认不打开
   mainWindow.webContents.openDevTools();
