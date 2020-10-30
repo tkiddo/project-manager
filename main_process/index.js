@@ -1,12 +1,12 @@
 // In main process.
-const localDir = require('./localdir_process');
-const template = require('./template_process');
-const project = require('./project.process');
-const eslint = require('./eslint_process');
-const task = require('./task_process');
-const component = require('./component_process');
-const common = require('./common_process');
-const collection = require('./collection_process');
+const localDir = require('./localdir');
+const template = require('./template');
+const project = require('./project');
+const eslint = require('./eslint');
+const task = require('./task');
+const component = require('./component');
+const common = require('./common');
+const collection = require('./collection');
 
 module.exports = function mainProcess() {
   localDir();

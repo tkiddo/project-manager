@@ -22,7 +22,7 @@ function setTray(win) {
   appTray = new Tray(trayIcon);
   // 托盘上下文菜单
   const contextMenu = Menu.buildFromTemplate(trayMenuTemplate);
-  appTray.setToolTip('Sliver GUI');
+  appTray.setToolTip('manager');
   appTray.setContextMenu(contextMenu);
   appTray.on('click', () => {
     win.show();
@@ -47,10 +47,10 @@ function createWindow() {
   setTray(mainWindow);
 
   // 加载应用-----适用于生产模式
-  // mainWindow.loadFile('./dist/index.html');
+  mainWindow.loadFile('./dist/index.html');
 
   // 加载应用----适用于开发模式
-  mainWindow.loadURL('http://localhost:3001/');
+  // mainWindow.loadURL('http://localhost:3001/');
 
   // 打开开发者工具，默认不打开
   mainWindow.webContents.openDevTools();
@@ -71,7 +71,7 @@ app.on('ready', () => {
 app.on('window-all-closed', () => {
   // macOS中除非用户按下 `Cmd + Q` 显式退出,否则应用与菜单栏始终处于活动状态.
   if (process.platform !== 'darwin') {
-    // app.quit();
+    app.quit();
   }
 });
 
