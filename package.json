@@ -97,7 +97,7 @@
     "bootstrap": "^4.5.1",
     "consolidate": "^0.16.0",
     "download-git-repo": "^3.0.2",
-    "electron": "^10.0.0",
+    "electron": "^10.1.5",
     "iconv-lite": "^0.6.2",
     "jquery": "^3.5.1",
     "metalsmith": "^2.3.0",
