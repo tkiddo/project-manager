@@ -42,7 +42,5 @@ describe('Application launch', function () {
       // Please note that getWindowCount() will return 2 if `dev tools` are opened.
       assert.strictEqual(count, 2);
     });
-	});
-	
-	it('')
+  });
 });
